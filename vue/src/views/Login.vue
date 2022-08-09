@@ -1,7 +1,10 @@
 <template>
   <div id="login" class="text-center">
+    <div id="imagediv">
+
+    <img class="background" src="pexels-janko-ferlic-590493.jpg">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
       <div
         class="alert alert-danger"
         role="alert"
@@ -31,9 +34,13 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      
+      <router-link id="links" :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit">Sign in</button>
     </form>
+
+    <h1>Name of App!</h1>
+    </div>
   </div>
 </template>
 
@@ -74,3 +81,37 @@ export default {
   }
 };
 </script>
+
+<style>
+.background{
+height: 90vh;
+  width: 100vw;
+}
+
+#imagediv{
+  
+  background-color: rgb(46,55,80);
+}
+
+.form-signin{
+  position:absolute;
+  top:20px;
+  left: 10%;
+  color: white;
+  text-decoration: none;
+}
+
+#links{
+  text-decoration: none;
+  color:white;
+}
+
+h1 {
+  position:absolute;
+  top:50%;
+  left: 10%;
+  color:white;
+  padding: 0,0,0,20px;
+}
+
+</style>

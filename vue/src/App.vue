@@ -7,3 +7,12 @@
     <router-view />
   </div>
 </template>
+
+
+<style>
+#nav{
+  left:10%;
+  padding-left:10%
+}
+
+</style>
