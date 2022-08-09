@@ -1,6 +1,7 @@
-package com.techelevator.model;
+package com.techelevator.model.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.techelevator.model.Authority;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -15,6 +16,11 @@ public class User {
    @JsonIgnore
    private boolean activated;
    private Set<Authority> authorities = new HashSet<>();
+   private int numOfPrizes;
+   private int minutesRead;
+   private int numOfBooksRead;
+   private String familyAccount;
+   private String role;
 
    public User() { }
 
@@ -64,6 +70,46 @@ public class User {
 
    public void setAuthorities(Set<Authority> authorities) {
       this.authorities = authorities;
+   }
+
+   public int getNumOfPrizes() {
+      return numOfPrizes;
+   }
+
+   public void setNumOfPrizes(int numOfPrizes) {
+      this.numOfPrizes = numOfPrizes;
+   }
+
+   public int getMinutesRead() {
+      return minutesRead;
+   }
+
+   public void setMinutesRead(int minutesRead) {
+      this.minutesRead = minutesRead;
+   }
+
+   public int getNumOfBooksRead() {
+      return numOfBooksRead;
+   }
+
+   public void setNumOfBooksRead(int numOfBooksRead) {
+      this.numOfBooksRead = numOfBooksRead;
+   }
+
+   public String getFamilyAccount() {
+      return familyAccount;
+   }
+
+   public void setFamilyAccount(String familyAccount) {
+      this.familyAccount = familyAccount;
+   }
+
+   public String getRole() {
+      return role;
+   }
+
+   public void setRole(String role) {
+      this.role = role;
    }
 
    public void setAuthorities(String authorities) {

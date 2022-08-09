@@ -16,6 +16,6 @@ public class Prize {
 
     public Prize(int prizeValue, String name, String description, int mileStone, ArrayList userGroup, int maxPrizes, LocalDate startDate, LocalDate endDate) {
         this.prizeValue = prizeValue;
-        this.
+
     }
 }

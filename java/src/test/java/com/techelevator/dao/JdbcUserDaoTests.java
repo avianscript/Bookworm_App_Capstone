@@ -1,6 +1,6 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.User;
+import com.techelevator.model.User.User;
 import com.techelevator.model.UserNotFoundException;
 import org.junit.Assert;
 import org.junit.Before;
