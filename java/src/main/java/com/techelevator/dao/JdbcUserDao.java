@@ -83,6 +83,15 @@ public class JdbcUserDao implements UserDao {
         return jdbcTemplate.update(insertUserSql, username, password_hash, ssRole) == 1;
     }
 
+    @Override
+    public boolean createFamilyAccount(String familyName, int userId) {
+        String sql = "INSERT INTO family_account (family_name) values (?) RETURNING family_id";
+        int familyId = jdbcTemplate.update(sql, familyName);
+
+        sql = "INSERT INTO family_user (family_id, user_id) values (?, ?)";
+        return jdbcTemplate.update(sql, familyId, userId) == 1;
+    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
