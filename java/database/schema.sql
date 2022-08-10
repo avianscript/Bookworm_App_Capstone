@@ -1,8 +1,12 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS prize;
+DROP TABLE IF EXISTS book;
+DROP TABLE IF EXISTS family_user;
+DROP TABLE IF EXISTS family_account;
+DROP TABLE IF EXISTS public.users;
 
-CREATE TABLE prize (
+CREATE TABLE IF NOT EXISTS prize (
 	prize_id SERIAL,
 	prize_name varchar(50) NOT NULL UNIQUE,
 	description varchar(50) NOT NULL,
@@ -14,10 +18,7 @@ CREATE TABLE prize (
 	CONSTRAINT PK_prizeid PRIMARY KEY (prize_id)
 );
 
-
-DROP TABLE IF EXISTS book;
-
-CREATE TABLE book (
+CREATE TABLE IF NOT EXISTS book (
 	book_id SERIAL,
 	book_name varchar(50) NOT NULL,
 	description varchar(50) NOT NULL,
@@ -29,7 +30,6 @@ CREATE TABLE book (
 	CONSTRAINT PK_bookid PRIMARY KEY (book_id)
 );
 
-DROP TABLE IF EXISTS public.users;
 
 CREATE TABLE IF NOT EXISTS public.users
 (
@@ -46,24 +46,20 @@ CREATE TABLE IF NOT EXISTS public.users
     CONSTRAINT users_username_key UNIQUE (username)
 );
 
-DROP TABLE IF EXISTS public.family_account;
 
-CREATE TABLE IF NOT EXISTS public.family_account
-(
-    user_id  SERIAL,
-    username character varying(50) NOT NULL,
-    password_hash character varying(200) NOT NULL,
-    role character varying(50),
-    numofprizes integer DEFAULT 0,
-    minutesread integer DEFAULT 0,
-    booksread integer DEFAULT 0,
-    familyaccount character varying(50),
-    status smallint DEFAULT 1,
-    CONSTRAINT pk_user PRIMARY KEY (user_id),
-    CONSTRAINT users_username_key UNIQUE (username)
+
+CREATE TABLE IF NOT EXISTS family_account (
+	family_id SERIAL,
+	family_name varchar(50) NOT NULL,
+	CONSTRAINT PK_family PRIMARY KEY (family_id)
 );
 
-
+CREATE TABLE IF NOT EXISTS family_user (
+	family_id INT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT FK_family_id FOREIGN KEY (family_id) REFERENCES family_account (family_id),
+	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
 
 COMMIT TRANSACTION;
 
