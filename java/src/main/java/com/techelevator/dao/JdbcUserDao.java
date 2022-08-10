@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 import com.techelevator.model.UserNotFoundException;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -84,12 +85,24 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean createFamilyAccount(String familyName, int userId) {
+    public void createFamilyAccount(String familyName, int userId) {
         String sql = "INSERT INTO family_account (family_name) values (?) RETURNING family_id";
-        int familyId = jdbcTemplate.update(sql, familyName);
+        Integer familyId;
+        try {
+            familyId = jdbcTemplate.queryForObject(sql, Integer.class, familyName);
+        } catch (DataAccessException e) {
+            return;
+        }
 
         sql = "INSERT INTO family_user (family_id, user_id) values (?, ?)";
-        return jdbcTemplate.update(sql, familyId, userId) == 1;
+        try {
+            jdbcTemplate.update(sql, familyId, userId);
+        } catch (DataAccessException e) {
+            return;
+        }
+
+        return;
+
     }
 
     private User mapRowToUser(SqlRowSet rs) {

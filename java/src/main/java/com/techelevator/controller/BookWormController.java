@@ -28,4 +28,11 @@ public class BookWormController {
         parentService.createChildAccount(newUser.getUsername(), newUser.getPassword());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/register_family_account", method = RequestMethod.POST)
+    public void createFamilyAccount(@Valid @RequestBody String familyName, Principal curUser) {
+        parentService.createFamilyAccount(familyName, curUser.getName());
+    }
+
 }
