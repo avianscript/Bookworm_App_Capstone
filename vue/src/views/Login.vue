@@ -82,7 +82,8 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .background{
 height: 90vh;
   width: 100vw;
@@ -113,5 +114,6 @@ h1 {
   color:white;
   padding: 0,0,0,20px;
 }
+
 
 </style>
