@@ -7,7 +7,7 @@
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Username: &nbsp;</label>
       <input
         type="text"
         id="username"
@@ -17,7 +17,8 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      <div id="registerpassword">
+      <label for="password" class="sr-only">Password: &nbsp;</label>
       <input
         type="password"
         id="password"
@@ -26,6 +27,8 @@
         v-model="user.password"
         required
       />
+      </div>
+      <label for="confirmPassword" class="sr-only">Confirm Password: &nbsp;</label>
       <input
         type="password"
         id="confirmPassword"
@@ -34,10 +37,14 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link id="links" :to="{ name: 'login' }">Have an account?</router-link>
+      <div id="createaccountbtn">
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
+      </div>
+      <div id="haveanaccountlink">
+      <router-link id="links" :to="{ name: 'login' }">Have an account?</router-link>
+      </div>
     </form>
     <h1>The Bookworm App!</h1>
     </div>
@@ -96,7 +103,6 @@ export default {
 
 <style scoped>
 .background{
-height: 90vh;
   width: 100vw;
 }
 
@@ -107,12 +113,12 @@ height: 90vh;
 
 .form-register{
   position:absolute;
-  top:40px;
-  left: 10%;
+  top:30%;
+  left: 8%;
   color: white;
   border: solid;
   border-color: white;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 3px;
   padding: 10px;
   text-decoration: none;
@@ -126,10 +132,34 @@ height: 90vh;
 
 h1 {
   position:absolute;
-  top:50%;
-  left: 10%;
+  top: 25%;
+  left: 8%;
   color:white;
   padding: 0,0,0,20px;
+  font-family: "Pangolin", sans-serif;
+}
+
+h2 {
+  margin-top:10px;
+  margin-bottom: 10px;
+  font-size: 2em;
+  font-family: "Pangolin", sans-serif;
+}
+
+#password {
+  margin-left: 58px;
+}
+
+#username {
+  margin-left: 54px;
+}
+
+#createaccountbtn {
+  margin-left: 128px;
+}
+
+#links {
+  margin-left: 128px;
 }
 
 </style>

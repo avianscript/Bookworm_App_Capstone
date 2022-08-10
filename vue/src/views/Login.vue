@@ -16,7 +16,7 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
+      <label for="username" class="sr-only">Username: &nbsp;</label>
       <input
         type="text"
         id="username"
@@ -25,7 +25,7 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      <label for="password" class="sr-only">Password: &nbsp;</label>
       <input
         type="password"
         id="password"
@@ -103,14 +103,14 @@ export default {
   color: white;
   border: solid;
   border-color: white;
-  border-width: 2px;
+  border-width: 1px;
   border-radius: 3px;
   padding: 10px;
   text-decoration: none;
   background-color: rgba(69, 31, 85, 0.5);
 }
 
-h2{
+h2 {
   font-size: 2em;
   font-family: "Pangolin", sans-serif;
 }
@@ -126,6 +126,8 @@ h1 {
   left: 10%;
   color:white;
   padding: 0,0,0,20px;
+  font-family: "Pangolin", sans-serif;
 }
+
 
 </style>
