@@ -18,4 +18,10 @@ public class ParentService {
         int curId = userDao.findIdByUsername(curUsername);
         userDao.createFamilyAccount(familyName, curId);
     }
+
+    public void addFamilyMember(String username, String curUsername){
+        int curId = userDao.findIdByUsername(curUsername);
+        int addedId = userDao.findIdByUsername(username);
+        userDao.addFamilyMember(curId, addedId);
+    }
 }

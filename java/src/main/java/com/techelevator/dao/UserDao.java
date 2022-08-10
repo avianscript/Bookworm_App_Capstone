@@ -17,4 +17,6 @@ public interface UserDao {
     boolean create(String username, String password, String role);
 
     void createFamilyAccount(String familyName, int userId);
+
+    void addFamilyMember(int curId, int addedId);
 }

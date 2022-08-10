@@ -102,7 +102,15 @@ public class JdbcUserDao implements UserDao {
         }
 
         return;
+    }
 
+    @Override
+    public void addFamilyMember(int curId, int addedId) {
+        String sql = "SELECT family_id FROM family_user WHERE user_id = ?";
+        Integer familyId = jdbcTemplate.queryForObject(sql, Integer.class, curId);
+
+        sql = "INSERT INTO family_user (family_id, user_id) values (?, ?)";
+        jdbcTemplate.update(sql, familyId, addedId);
     }
 
     private User mapRowToUser(SqlRowSet rs) {
