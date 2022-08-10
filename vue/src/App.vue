@@ -15,4 +15,10 @@
   padding-left:10%
 }
 
+@font-face {
+  font-family: "Mouse Memoirs";
+  src: local("Mouse Memoirs"),
+   url(./fonts/MouseMemoirs-Regular.ttf) format("truetype");
+}
+
 </style>
