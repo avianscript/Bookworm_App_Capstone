@@ -35,4 +35,11 @@ public class BookWormController {
         parentService.createFamilyAccount(familyName, curUser.getName());
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/add_family_member", method = RequestMethod.POST)
+    public void addFamilyMember(@RequestBody String username, Principal curUser){
+        parentService.addFamilyMember(username, curUser.getName());
+    }
+
 }
