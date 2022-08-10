@@ -1,7 +1,9 @@
 <template>
   <div id="register" class="text-center">
+    <div class="imagediv">
+        <img class="background" src="pexels-janko-ferlic-590493.jpg">
     <form class="form-register" @submit.prevent="register">
-      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+      <h2 class="h3 mb-3 font-weight-normal">Create Account</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -32,11 +34,13 @@
         v-model="user.confirmPassword"
         required
       />
-      <router-link :to="{ name: 'login' }">Have an account?</router-link>
+      <router-link id="links" :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
     </form>
+    <h1>The Bookworm App!</h1>
+    </div>
   </div>
 </template>
 
@@ -90,4 +94,42 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.background{
+height: 90vh;
+  width: 100vw;
+}
+
+.imagediv{
+  
+  background-color: rgb(46,55,80);
+}
+
+.form-register{
+  position:absolute;
+  top:40px;
+  left: 10%;
+  color: white;
+  border: solid;
+  border-color: white;
+  border-width: 2px;
+  border-radius: 3px;
+  padding: 10px;
+  text-decoration: none;
+  background-color: rgba(69, 31, 85, 0.5);
+}
+
+#links{
+  text-decoration: none;
+  color:white;
+}
+
+h1 {
+  position:absolute;
+  top:50%;
+  left: 10%;
+  color:white;
+  padding: 0,0,0,20px;
+}
+
+</style>

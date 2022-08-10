@@ -21,4 +21,10 @@
    url(./fonts/MouseMemoirs-Regular.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "Pangolin";
+  src: local("Pangolin"),
+  url(./fonts/Pangolin-Regular.ttf) format("truetype");
+}
+
 </style>

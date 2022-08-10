@@ -3,6 +3,7 @@
     <div id="imagediv">
 
     <img class="background" src="pexels-janko-ferlic-590493.jpg">
+    <div id="signinbackground">
     <form class="form-signin" @submit.prevent="login">
       <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
       <div
@@ -20,7 +21,6 @@
         type="text"
         id="username"
         class="form-control"
-        placeholder="Username"
         v-model="user.username"
         required
         autofocus
@@ -30,16 +30,18 @@
         type="password"
         id="password"
         class="form-control"
-        placeholder="Password"
         v-model="user.password"
         required
       />
       
-      <router-link id="links" :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit">Sign in</button>
+      <div id="registerlink">
+      <router-link id="links" :to="{ name: 'register' }">Need an account?</router-link>
+      </div>
     </form>
+    </div>
 
-    <h1>Name of App!</h1>
+    <h1>The Bookworm App!</h1>
     </div>
   </div>
 </template>
@@ -85,7 +87,7 @@ export default {
 <style scoped>
 
 .background{
-height: 90vh;
+  height: 90vh;
   width: 100vw;
 }
 
@@ -96,10 +98,21 @@ height: 90vh;
 
 .form-signin{
   position:absolute;
-  top:20px;
+  top:40px;
   left: 10%;
   color: white;
+  border: solid;
+  border-color: white;
+  border-width: 2px;
+  border-radius: 3px;
+  padding: 10px;
   text-decoration: none;
+  background-color: rgba(69, 31, 85, 0.5);
+}
+
+h2{
+  font-size: 2em;
+  font-family: "Pangolin", sans-serif;
 }
 
 #links{
@@ -114,6 +127,5 @@ h1 {
   color:white;
   padding: 0,0,0,20px;
 }
-
 
 </style>
