@@ -11,7 +11,7 @@ public class ParentService {
     }
 
     public void createChildAccount(String username, String password) {
-        userDao.create(username, password, "role_user");
+        userDao.create(username, password, "ROLE_USER");
     }
 
     public void createFamilyAccount() {

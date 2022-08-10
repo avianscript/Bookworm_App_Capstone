@@ -40,7 +40,6 @@ CREATE TABLE IF NOT EXISTS public.users
     numofprizes integer DEFAULT 0,
     minutesread integer DEFAULT 0,
     booksread integer DEFAULT 0,
-    familyaccount character varying(50),
     status smallint DEFAULT 1,
     CONSTRAINT pk_user PRIMARY KEY (user_id),
     CONSTRAINT users_username_key UNIQUE (username)
