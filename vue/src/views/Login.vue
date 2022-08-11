@@ -25,6 +25,7 @@
         required
         autofocus
       />
+      <div id="loginpassword">
       <label for="password" class="sr-only">Password: &nbsp;</label>
       <input
         type="password"
@@ -33,8 +34,10 @@
         v-model="user.password"
         required
       />
-      
+      </div>
+      <div id="signinbtn">
       <button type="submit">Sign in</button>
+      </div>
       <div id="registerlink">
       <router-link id="links" :to="{ name: 'register' }">Need an account?</router-link>
       </div>
@@ -87,7 +90,6 @@ export default {
 <style scoped>
 
 .background{
-  height: 90vh;
   width: 100vw;
 }
 
@@ -98,8 +100,8 @@ export default {
 
 .form-signin{
   position:absolute;
-  top:40px;
-  left: 10%;
+  top: 30%;
+  left: 8%;
   color: white;
   border: solid;
   border-color: white;
@@ -111,9 +113,12 @@ export default {
 }
 
 h2 {
+  margin-top:10px;
+  margin-bottom: 10px;
   font-size: 2em;
   font-family: "Pangolin", sans-serif;
 }
+
 
 #links{
   text-decoration: none;
@@ -122,12 +127,23 @@ h2 {
 
 h1 {
   position:absolute;
-  top:50%;
-  left: 10%;
+  top: 25%;
+  left: 8%;
   color:white;
   padding: 0,0,0,20px;
   font-family: "Pangolin", sans-serif;
 }
 
+#signinbtn {
+  margin-left: 74px;
+}
+
+#password {
+  margin-left: 4px;
+}
+
+#registerlink {
+  margin-left: 75px;
+}
 
 </style>
