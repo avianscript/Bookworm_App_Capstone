@@ -1,5 +1,6 @@
 package com.techelevator.controller;
 
+import com.techelevator.Service.BookService;
 import com.techelevator.Service.ParentService;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.RegisterUserDTO;
@@ -14,10 +15,12 @@ import java.security.Principal;
 @RestController
 public class BookWormController {
     private ParentService parentService;
+    private BookService bookService;
     private UserDao userDao;
 
-    BookWormController(ParentService parentService, UserDao userDao){
+    BookWormController(ParentService parentService, BookService bookService, UserDao userDao){
         this.parentService = parentService;
+        this.bookService = bookService;
         this.userDao = userDao;
     }
 
@@ -40,6 +43,13 @@ public class BookWormController {
     @RequestMapping(value = "/add_family_member", method = RequestMethod.POST)
     public void addFamilyMember(@RequestBody String username, Principal curUser){
         parentService.addFamilyMember(username, curUser.getName());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/add_book", method = RequestMethod.POST)
+    public void addBook(@RequestBody String Isbn, Principal curUser){
+        bookService.createBook(Isbn, curUser.getName());
     }
 
 }

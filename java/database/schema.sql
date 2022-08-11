@@ -1,9 +1,10 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS prize;
-DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS family_user;
 DROP TABLE IF EXISTS family_account;
+DROP TABLE IF EXISTS book_user;
+DROP TABLE IF EXISTS book;
 DROP TABLE IF EXISTS public.users;
 
 CREATE TABLE IF NOT EXISTS prize (
@@ -20,12 +21,12 @@ CREATE TABLE IF NOT EXISTS prize (
 
 CREATE TABLE IF NOT EXISTS book (
 	book_id SERIAL,
-	book_name varchar(50) NOT NULL,
-	description varchar(50) NOT NULL,
+	book_name varchar(500) NOT NULL,
+	description varchar(10000) NOT NULL,
 	author varchar(50) NOT NULL,
 	numberofpages int DEFAULT 0,
-	rating varchar(2) NOT NULL,
-	genre varchar(50) NOT NULL,
+	rating varchar(2) NULL,
+	genre varchar(50) NULL,
 
 	CONSTRAINT PK_bookid PRIMARY KEY (book_id)
 );
@@ -57,6 +58,13 @@ CREATE TABLE IF NOT EXISTS family_user (
 	family_id INT NOT NULL,
 	user_id INT NOT NULL,
 	CONSTRAINT FK_family_id FOREIGN KEY (family_id) REFERENCES family_account (family_id),
+	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
+);
+
+CREATE TABLE IF NOT EXISTS book_user (
+	book_id INT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT FK_book_id FOREIGN KEY (book_id) REFERENCES book (book_id),
 	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
