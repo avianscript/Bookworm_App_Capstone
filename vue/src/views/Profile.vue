@@ -14,6 +14,13 @@
 
      <div class="profilewindow">
         <h3>Welcome to your profile!</h3>
+        <button id="recordreading" v-on:click="setReadingActivitytoTrue()">Add Reading Activity</button>
+        <form v-show="addReadingActivity" >
+            <input name="userName" type="text" v-model="readingActivity.userName"/>
+            <input name="minutes_read" type="number" v-model="readingActivity.minutes_read" />
+            <input name="isbn" type="text" v-model="readingActivity.isbn"/>
+            <button type="submit" v-on:click="submitReadingActivity()">Submit Reading Activity</button>
+        </form>
          <div class="bookscompleted">
             <p>{{ this.$store.state.bookCompleted }}</p>
         </div>
@@ -28,11 +35,28 @@
 import BookService from '../services/BookService'
 export default {
     name: 'the-profile',
+  
+
     data() {
         return {
-        
+          addReadingActivity: false,
+          readingActivity: {
+              userName: "", 
+              minutes_read: "",
+              isbn: ""
+          }
     }
 },
+    methods: {
+        setReadingActivitytoTrue() {
+            this.addReadingActivity = true;
+        },
+
+        submitReadingActivity() {
+            BookService
+            .submitReading(this.readingActivity)
+        }
+    },
     props: ["user"],
     
     created() {

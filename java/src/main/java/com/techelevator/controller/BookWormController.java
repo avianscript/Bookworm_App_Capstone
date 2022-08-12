@@ -63,20 +63,17 @@ public class BookWormController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/log_reading", method = RequestMethod.POST)
     public void logReading(@RequestBody Reading reading) {
+        reading.setBook_id(1);
+        reading.setUser_id(1);
         readingService.logReading(reading);
     }
 
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public String[] userReadingList(Principal curUser) {
+    public List<Book> userReadingList(Principal curUser) {
 
-        List<Book> readingList = bookService.userReadingList(userDao.findIdByUsername(curUser.getName()));
-        String [] books = new String[readingList.size()];
-        for(int i = 0; i < readingList.size(); i++) {
-            books[i] = readingList.get(i).getBook_name();
-        }
-        return books;
+        return bookService.userReadingList(userDao.findIdByUsername(curUser.getName()));
     }
 
 }
