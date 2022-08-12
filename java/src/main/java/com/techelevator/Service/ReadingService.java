@@ -2,7 +2,9 @@ package com.techelevator.Service;
 
 import com.techelevator.dao.ReadingDao;
 import com.techelevator.model.User.Reading;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ReadingService {
     private ReadingDao readingDao;
 

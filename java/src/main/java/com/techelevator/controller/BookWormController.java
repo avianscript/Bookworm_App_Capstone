@@ -2,8 +2,10 @@ package com.techelevator.controller;
 
 import com.techelevator.Service.BookService;
 import com.techelevator.Service.ParentService;
+import com.techelevator.Service.ReadingService;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.RegisterUserDTO;
+import com.techelevator.model.User.Reading;
 import com.techelevator.model.User.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,11 +19,13 @@ public class BookWormController {
     private ParentService parentService;
     private BookService bookService;
     private UserDao userDao;
+    private ReadingService readingService;
 
-    BookWormController(ParentService parentService, BookService bookService, UserDao userDao){
+    BookWormController(ParentService parentService, BookService bookService, UserDao userDao, ReadingService readingService){
         this.parentService = parentService;
         this.bookService = bookService;
         this.userDao = userDao;
+        this.readingService = readingService;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -50,6 +54,13 @@ public class BookWormController {
     @RequestMapping(value = "/add_book", method = RequestMethod.POST)
     public void addBook(@RequestBody String Isbn, Principal curUser){
         bookService.createBook(Isbn, curUser.getName());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/log_reading", method = RequestMethod.POST)
+    public void logReading(@RequestBody Reading reading) {
+        readingService.logReading(reading);
     }
 
 }
