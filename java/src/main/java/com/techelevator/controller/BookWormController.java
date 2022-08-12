@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.sql.Array;
 import java.util.List;
 
 @RestController
@@ -67,8 +68,14 @@ public class BookWormController {
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = "/books", method = RequestMethod.GET)
-    public List<Book> userReadingList(Principal curUser) {
-        return bookService.userReadingList(userDao.findIdByUsername(curUser.getName()));
+    public String[] userReadingList(Principal curUser) {
+
+        List<Book> readingList = bookService.userReadingList(userDao.findIdByUsername(curUser.getName()));
+        String [] books = new String[readingList.size()];
+        for(int i = 0; i < readingList.size(); i++) {
+            books[i] = readingList.get(i).getBook_name();
+        }
+        return books;
     }
 
 }

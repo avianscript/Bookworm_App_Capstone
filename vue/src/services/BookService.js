@@ -4,6 +4,6 @@ import axios from 'axios';
 export default {
 
     list(user) {
-        return axios.get(`${user}/books`);
+        return axios.get(`/books`, user);
     }
 }
