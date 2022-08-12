@@ -6,7 +6,5 @@ INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpUL
 insert into prize(prize_name, description, milestone, maxprizes, startdate, enddate)
 values('icecream', 'Vanilla Ice cream cone', 10,100 ,'08/09/2022', '08/30/2022' );
 
-insert into book(book_name, description, author, rating, genre)
-values('Mybook', 'Book about me', 'Me Author', 1, 'comedy');
 
 COMMIT TRANSACTION;

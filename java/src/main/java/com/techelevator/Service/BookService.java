@@ -9,6 +9,8 @@ import com.techelevator.model.User.WorksAPI;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+
 @Component
 public class BookService {
     private BookDao bookDao;
@@ -41,5 +43,9 @@ public class BookService {
 
         bookDao.createBook(newBook, userDao.findIdByUsername(curUsername));
         return newBook;
+    }
+
+    public List<Book> userReadingList(int userId){
+        return bookDao.userReadingList(userId);
     }
 }

@@ -4,6 +4,7 @@ import com.techelevator.Service.BookService;
 import com.techelevator.Service.ParentService;
 import com.techelevator.Service.ReadingService;
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.Book;
 import com.techelevator.model.RegisterUserDTO;
 import com.techelevator.model.Reading;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 public class BookWormController {
@@ -60,6 +62,13 @@ public class BookWormController {
     @RequestMapping(value = "/log_reading", method = RequestMethod.POST)
     public void logReading(@RequestBody Reading reading) {
         readingService.logReading(reading);
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/books", method = RequestMethod.GET)
+    public List<Book> userReadingList(Principal curUser) {
+        return bookService.userReadingList(userDao.findIdByUsername(curUser.getName()));
     }
 
 }

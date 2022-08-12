@@ -9,6 +9,7 @@ public class Book {
     private int numberofpages;
     private String rating;
     private String genre;
+    private String format;
 
     public int getBook_id() {
         return book_id;
@@ -72,5 +73,13 @@ public class Book {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getFormat() {
+        return format;
+    }
+
+    public void setFormat(String format) {
+        this.format = format;
     }
 }
