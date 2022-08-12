@@ -1,9 +1,10 @@
-package com.techelevator.model.User;
+package com.techelevator.model;
 
 public class Reading {
 
     private int user_id;
     private int book_id;
+    private String isbn;
     private int minutes_read;
 
     public int getUser_id() {
@@ -28,5 +29,13 @@ public class Reading {
 
     public void setMinutes_read(int minutes_read) {
         this.minutes_read = minutes_read;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }
