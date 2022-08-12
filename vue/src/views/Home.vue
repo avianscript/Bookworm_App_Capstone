@@ -7,7 +7,7 @@
   </div>
   <div class="nav">
     <p>Profile</p>
-    <p>Family</p>
+    <router-link class="familylink" :to="{ name: 'family'}">Family</router-link>
     <p>Reading List</p>
     <p>Prizes</p>
   </div>
@@ -15,8 +15,11 @@
 </template>
 
 <script>
+import theFamily from '../views/Family.vue';
+
 export default {
-  name: "home"
+  name: "home",
+  components: theFamily
 };
 </script>
 
@@ -52,6 +55,11 @@ height: 90vh;
 
 }
 
-
+.familyview {
+  border-width: 20px;
+  border-color: black;
+  text-align: center;
+  top: 10px;
+}
 
 </style>
