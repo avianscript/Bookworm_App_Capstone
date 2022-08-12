@@ -16,7 +16,7 @@
         <h3>Welcome to your profile!</h3>
         <button id="recordreading" v-on:click="setReadingActivitytoTrue()">Add Reading Activity</button>
         <form v-show="addReadingActivity" >
-            <input name="userName" type="text" v-model="readingActivity.userName"/>
+            <input name="userName" type="text" v-model="readingActivity.username"/>
             <input name="minutes_read" type="number" v-model="readingActivity.minutes_read" />
             <input name="isbn" type="text" v-model="readingActivity.isbn"/>
             <button type="submit" v-on:click="submitReadingActivity()">Submit Reading Activity</button>
@@ -41,7 +41,7 @@ export default {
         return {
           addReadingActivity: false,
           readingActivity: {
-              userName: "", 
+              username: "", 
               minutes_read: "",
               isbn: ""
           }

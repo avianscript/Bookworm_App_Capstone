@@ -6,6 +6,7 @@ public class Reading {
     private int book_id;
     private String isbn;
     private int minutes_read;
+    private String username;
 
     public int getUser_id() {
         return user_id;
@@ -37,5 +38,13 @@ public class Reading {
 
     public void setIsbn(String isbn) {
         this.isbn = isbn;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

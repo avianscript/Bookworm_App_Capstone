@@ -37,6 +37,11 @@ public class JdbcBookDao implements BookDao{
         }
     }
 
+    public int getIdByIsbn(String Isbn){
+        String sql = "SELECT book_id FROM book WHERE isbn = ?";
+        return jdbcTemplate.queryForObject(sql, Integer.class, Isbn);
+    }
+
     public ArrayList<Book> userReadingList(int userId){
         String sql = "SELECT b.* FROM book_user bu JOIN book b ON bu.book_id = b.book_id WHERE bu.user_id = ?";
         SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, userId);

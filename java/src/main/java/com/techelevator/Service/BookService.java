@@ -48,4 +48,8 @@ public class BookService {
     public List<Book> userReadingList(int userId){
         return bookDao.userReadingList(userId);
     }
+
+    public int getIdByIsbn(String Isbn){
+        return bookDao.getIdByIsbn(Isbn);
+    }
 }

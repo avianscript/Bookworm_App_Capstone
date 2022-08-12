@@ -63,8 +63,8 @@ public class BookWormController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/log_reading", method = RequestMethod.POST)
     public void logReading(@RequestBody Reading reading) {
-        reading.setBook_id(1);
-        reading.setUser_id(1);
+        reading.setBook_id(bookService.getIdByIsbn(reading.getIsbn()));
+        reading.setUser_id(userDao.findIdByUsername(reading.getUsername()));
         readingService.logReading(reading);
     }
 

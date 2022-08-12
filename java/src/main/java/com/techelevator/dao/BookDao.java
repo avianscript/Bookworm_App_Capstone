@@ -10,4 +10,6 @@ public interface BookDao {
 
     List<Book> userReadingList(int userId);
 
+    int getIdByIsbn(String Isbn);
+
 }
