@@ -6,7 +6,7 @@
     <p>Welcome, user!</p>
   </div>
   <div class="nav">
-    <p>Profile</p>
+    <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
     <router-link class="familylink" :to="{ name: 'family'}">Family</router-link>
     <p>Reading List</p>
     <p>Prizes</p>
@@ -60,6 +60,11 @@ height: 90vh;
   border-color: black;
   text-align: center;
   top: 10px;
+}
+
+.profilelink {
+      color: #F8C630;
+
 }
 
 </style>
