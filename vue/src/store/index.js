@@ -18,6 +18,7 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    familyMembers: [],
     token: currentToken || '',
     user: currentUser || {}
   },
