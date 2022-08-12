@@ -2,11 +2,11 @@
     <div>
         <img class="homebackground" src="living-room.jpg">
     <div class="home">
-    <h1>Home</h1>
+    
     <p>Welcome, user!</p>
     </div>
     <div class="nav">
-    <p>Profile</p>
+    <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
     <router-link class="familylink" :to="{ name: 'family'}">Family</router-link>
     <p>Reading List</p>
     <p>Prizes</p>
