@@ -37,6 +37,7 @@ public class BookService {
         newBook.setAuthor(authorAPI.getName());
         newBook.setDescription(worksAPI.getDescription());
         newBook.setBook_name(bookAPI.getTitle());
+        newBook.setIsbn(Isbn);
 
         bookDao.createBook(newBook, userDao.findIdByUsername(curUsername));
         return newBook;

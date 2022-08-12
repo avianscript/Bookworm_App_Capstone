@@ -16,11 +16,11 @@ public class JdbcBookDao implements BookDao{
 
     @Override
     public void createBook(Book book, int userId){
-        String sql = "INSERT INTO book (book_name, description, author, numberofpages, rating, genre) values (?, ?, ?, ?, ?, ?) RETURNING book_id";
+        String sql = "INSERT INTO book (book_name, isbn, description, author, numberofpages, rating, genre) values (?, ?, ?, ?, ?, ?,?) RETURNING book_id";
 
         Integer bookId;
         try {
-            bookId = jdbcTemplate.queryForObject(sql, Integer.class, book.getBook_name(), book.getDescription(), book.getAuthor(), book.getNumberofpages(), book.getRating(), book.getGenre());
+            bookId = jdbcTemplate.queryForObject(sql, Integer.class, book.getBook_name(), book.getIsbn(), book.getDescription(), book.getAuthor(), book.getNumberofpages(), book.getRating(), book.getGenre());
         } catch (DataAccessException e) {
             return;
         }

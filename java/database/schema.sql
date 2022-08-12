@@ -75,6 +75,7 @@ CREATE TABLE IF NOT EXISTS book_user (
 
 CREATE TABLE IF NOT EXISTS reading_details(
 	book_id INT NOT NULL,
+	isbn varchar(50) NOT NULL,
 	user_id INT NOT NULL, 
 	minutes_read INT DEFAULT 0,
 	CONSTRAINT FK_book_id FOREIGN KEY (book_id) REFERENCES book (book_id),
@@ -84,5 +85,7 @@ CREATE TABLE IF NOT EXISTS reading_details(
 
 
 COMMIT TRANSACTION;
+
+select user_id from users where username = 'Sebrina'
 
 

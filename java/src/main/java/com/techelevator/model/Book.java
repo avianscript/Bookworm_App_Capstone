@@ -3,6 +3,7 @@ package com.techelevator.model;
 public class Book {
     private int book_id;
     private String book_name;
+    private String isbn;
     private String description;
     private String author;
     private int numberofpages;
@@ -63,5 +64,13 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 }
