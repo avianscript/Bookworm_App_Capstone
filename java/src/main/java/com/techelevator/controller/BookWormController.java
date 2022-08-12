@@ -6,6 +6,7 @@ import com.techelevator.Service.ReadingService;
 import com.techelevator.Service.UserService;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Book;
+import com.techelevator.model.ReadingActivity;
 import com.techelevator.model.RegisterUserDTO;
 import com.techelevator.model.Reading;
 import org.springframework.http.HttpStatus;
@@ -86,4 +87,27 @@ public class BookWormController {
         userService.updateBookStatus(userDao.findIdByUsername(curUser.getName()), bookService.getIdByIsbn(data.get(0)), data.get(1));
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/check_reading_activity", method = RequestMethod.GET)
+    public ReadingActivity checkReadingActivity(@RequestBody String userName) {
+
+        int userid = userDao.findIdByUsername(userName);
+        ReadingActivity readingActivity = new ReadingActivity( userService.getMinutesRead(userid), userService.getBooksByStatus(userid, "READ"),userService.getBooksByStatus(userid, "READING"));
+
+        return readingActivity;
+
+     }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/check_reading_activity_child", method = RequestMethod.GET)
+    public ReadingActivity checkReadingActivityChild(Principal curUser) {
+
+        int userid = userDao.findIdByUsername(curUser.getName());
+        ReadingActivity readingActivity = new ReadingActivity( userService.getMinutesRead(userid), userService.getBooksByStatus(userid, "READ"),userService.getBooksByStatus(userid, "READING"));
+
+        return readingActivity;
+
+    }
 }

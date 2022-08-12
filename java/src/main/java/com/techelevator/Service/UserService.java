@@ -14,4 +14,13 @@ public class UserService {
     public void updateBookStatus(int userId, int bookId, String status) {
         userDao.updateBookStatus(userId, bookId, status);
     }
+
+    public int getBooksByStatus(int userId, String status){
+        return userDao.getBooksByStatus(userId, status);
+
+    }
+
+    public int getMinutesRead(int userId){
+        return userDao.getMinutesRead(userId);
+    }
 }

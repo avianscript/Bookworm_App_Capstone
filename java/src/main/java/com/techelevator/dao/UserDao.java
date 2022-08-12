@@ -21,4 +21,10 @@ public interface UserDao {
     void addFamilyMember(int curId, int addedId);
 
     void updateBookStatus(int userId, int bookId, String status);
+
+    int getBooksByStatus(int userId, String status);
+
+    int getMinutesRead(int userId);
+
+
 }

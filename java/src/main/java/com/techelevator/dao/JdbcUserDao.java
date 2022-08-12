@@ -119,6 +119,21 @@ public class JdbcUserDao implements UserDao {
         jdbcTemplate.update(sql, status, userId, bookId);
     }
 
+
+    @Override
+    public int getBooksByStatus(int userId,String status){
+        String sql = "SELECT COUNT(*) FROM book_user where status = ? and user_id = ?";
+        Integer bookCount = jdbcTemplate.queryForObject(sql, Integer.class, status, userId);
+        return bookCount;
+    }
+
+    @Override
+    public  int getMinutesRead(int userId){
+        String sql = "SELECT sum(minutes_read) as totalMinutes from reading_details where user_id = ?";
+        Integer totalMinutes = jdbcTemplate.queryForObject(sql, Integer.class,  userId);
+        return totalMinutes;
+}
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));
