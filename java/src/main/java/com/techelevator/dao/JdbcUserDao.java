@@ -113,6 +113,12 @@ public class JdbcUserDao implements UserDao {
         jdbcTemplate.update(sql, familyId, addedId);
     }
 
+    @Override
+    public void updateBookStatus(int userId, int bookId, String status) {
+        String sql = "UPDATE book_user SET status = ? WHERE user_id = ? AND book_id = ?";
+        jdbcTemplate.update(sql, status, userId, bookId);
+    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getInt("user_id"));

@@ -3,6 +3,7 @@ package com.techelevator.controller;
 import com.techelevator.Service.BookService;
 import com.techelevator.Service.ParentService;
 import com.techelevator.Service.ReadingService;
+import com.techelevator.Service.UserService;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Book;
 import com.techelevator.model.RegisterUserDTO;
@@ -23,12 +24,14 @@ public class BookWormController {
     private BookService bookService;
     private UserDao userDao;
     private ReadingService readingService;
+    private UserService userService;
 
-    BookWormController(ParentService parentService, BookService bookService, UserDao userDao, ReadingService readingService){
+    BookWormController(ParentService parentService, BookService bookService, UserDao userDao, ReadingService readingService, UserService userService){
         this.parentService = parentService;
         this.bookService = bookService;
         this.userDao = userDao;
         this.readingService = readingService;
+        this.userService = userService;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -74,6 +77,13 @@ public class BookWormController {
     public List<Book> userReadingList(Principal curUser) {
 
         return bookService.userReadingList(userDao.findIdByUsername(curUser.getName()));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/update_book_status", method = RequestMethod.PUT)
+    public void updateBookStatus(@RequestBody List<String> data, Principal curUser) {
+        userService.updateBookStatus(userDao.findIdByUsername(curUser.getName()), bookService.getIdByIsbn(data.get(0)), data.get(1));
     }
 
 }
