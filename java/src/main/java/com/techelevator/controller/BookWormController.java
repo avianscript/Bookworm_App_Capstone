@@ -17,6 +17,7 @@ import java.sql.Array;
 import java.util.List;
 
 @RestController
+@CrossOrigin
 public class BookWormController {
     private ParentService parentService;
     private BookService bookService;
