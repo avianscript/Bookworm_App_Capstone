@@ -15,7 +15,7 @@
      <div class="profilewindow">
         <h3>Welcome to your profile!</h3>
          <div class="bookscompleted">
-            <p>{{ this.$store.state.booksCompleted }}</p>
+            <p>{{ this.$store.state.bookCompleted }}</p>
         </div>
     </div>
 
@@ -37,7 +37,7 @@ export default {
     
     created() {
             BookService.list(this.user).then(response => {
-                this.$store.state.booksCompleted = response.data;
+                this.$store.state.bookCompleted = response.data;
             })
         }
     }
