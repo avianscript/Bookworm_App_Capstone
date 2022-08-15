@@ -13,8 +13,8 @@
     </div>
         <div class="familywindow">
         <h3>The {{ familyName }} family</h3>
-        <div class="familymembers">
-            <p>{{this.$store.state.familyMembers}}</p>
+        <div class="familymembers" >
+            <p v-for="member in this.$store.state.familyMembers" v-bind:key="member.user_id">{{member.username}}</p>
         </div>
         <div>
             <p>Register your family!</p>
@@ -33,10 +33,12 @@
                 <input type="submit" v-on:click.prevent="registerChild()">
             </form>
         </div>
+
         <div>
+            <p>Add a family member</p>
             <form>
-                <input type="text" placeholder="ID of Family Member" v-model="newFamilyMember.user_id">
-                <input type="text" placeholder="ID of Family" v-model="newFamilyMember.family_id">
+                <input type="text" placeholder="ID of Family Member" v-model="newFamilyMember.username">
+                <!-- <input type="text" placeholder="ID of Family" v-model="newFamilyMember.family_id"> -->
                 <input type="submit" v-on:click.prevent="addFamilyMember()">
             </form>
         </div>
@@ -60,8 +62,8 @@ export default {
         },
         disabled: true,
         newFamilyMember: {
-            user_id: "",
-            family_id: ""
+            username: "",
+            // family_id: ""
         }
 
     }
@@ -69,7 +71,7 @@ export default {
     props: ["id"],
     
     created() {
-            FamilyService.list().then(response => {
+            FamilyService.list(this.user).then(response => {
                 this.$store.state.familyMembers = response.data;
             })
         },
@@ -91,9 +93,9 @@ export default {
         },
 
         addFamilyMember() {
-            FamilyService.addToFamilyAccount(this.username).then(response => {
+            FamilyService.addToFamilyAccount(this.newFamilyMember.username).then(response => {
                 if (response.status === 201) {
-                    this.$$router.push('/actioncompleted')
+                    this.$router.push('/actioncompleted')
                 }
             })
         }

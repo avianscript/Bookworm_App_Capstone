@@ -117,9 +117,13 @@ public class JdbcUserDao implements UserDao {
     @Override
     public List<User> familyMembers(int userId){
         String sql = "SELECT family_id FROM family_user WHERE user_id = ?";
-        Integer familyId = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+        SqlRowSet family = jdbcTemplate.queryForRowSet(sql, userId);
+        Integer familyId = 0;
+        if (family.next()) {
+           familyId = family.getInt("family_id");
+        }
 
-        sql = "SELECT u.* FROM user u JOIN family_user fu ON u.user_id = fu.user_id WHERE fu.family_id = ?";
+        sql = "SELECT * FROM users u JOIN family_user fu ON u.user_id = fu.user_id WHERE fu.family_id = ?";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, familyId);
         List<User> users = new ArrayList<>();
         while(rowSet.next()){

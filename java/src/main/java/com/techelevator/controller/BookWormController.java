@@ -118,6 +118,7 @@ public class BookWormController {
     @RequestMapping(value = "/family_members", method = RequestMethod.GET)
     public List<User> familyMembers(Principal principal) {
         int userId = userDao.findIdByUsername(principal.getName());
-        return userService.familyMembers(userId);
+        List<User> users =userService.familyMembers(userId);
+        return users;
     }
 }

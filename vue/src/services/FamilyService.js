@@ -4,7 +4,7 @@ import axios from 'axios';
 export default {
 
     list() {
-        return axios.get(`/family_user`);
+        return axios.get(`/family_members`);
     },
 
     registerChild(id) {
