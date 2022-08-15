@@ -26,5 +26,7 @@ public interface UserDao {
 
     int getMinutesRead(int userId);
 
+    List<User> familyMembers(int userId);
+
 
 }

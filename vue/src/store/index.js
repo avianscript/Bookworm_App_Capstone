@@ -27,6 +27,9 @@ export default new Vuex.Store({
     bookAdded: {
 
     },
+    bookCompleted: {
+
+    },
     token: currentToken || '',
     user: currentUser || {}
   },

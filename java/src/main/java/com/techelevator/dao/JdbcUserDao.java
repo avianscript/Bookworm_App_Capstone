@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -111,6 +112,20 @@ public class JdbcUserDao implements UserDao {
 
         sql = "INSERT INTO family_user (family_id, user_id) values (?, ?)";
         jdbcTemplate.update(sql, familyId, addedId);
+    }
+
+    @Override
+    public List<User> familyMembers(int userId){
+        String sql = "SELECT family_id FROM family_user WHERE user_id = ?";
+        Integer familyId = jdbcTemplate.queryForObject(sql, Integer.class, userId);
+
+        sql = "SELECT u.* FROM user u JOIN family_user fu ON u.user_id = fu.user_id WHERE fu.family_id = ?";
+        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql, familyId);
+        List<User> users = new ArrayList<>();
+        while(rowSet.next()){
+            users.add(mapRowToUser(rowSet));
+        }
+        return users;
     }
 
     @Override

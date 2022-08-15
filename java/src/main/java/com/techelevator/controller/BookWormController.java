@@ -9,6 +9,7 @@ import com.techelevator.model.Book;
 import com.techelevator.model.ReadingActivity;
 import com.techelevator.model.RegisterUserDTO;
 import com.techelevator.model.Reading;
+import com.techelevator.model.User.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -110,5 +111,13 @@ public class BookWormController {
 
         return readingActivity;
 
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/family_members", method = RequestMethod.GET)
+    public List<User> familyMembers(Principal principal) {
+        int userId = userDao.findIdByUsername(principal.getName());
+        return userService.familyMembers(userId);
     }
 }

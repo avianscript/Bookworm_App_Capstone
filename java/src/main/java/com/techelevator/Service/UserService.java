@@ -1,7 +1,10 @@
 package com.techelevator.Service;
 
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.User.User;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class UserService {
@@ -22,5 +25,9 @@ public class UserService {
 
     public int getMinutesRead(int userId){
         return userDao.getMinutesRead(userId);
+    }
+
+    public List<User> familyMembers(int userId){
+        return userDao.familyMembers(userId);
     }
 }

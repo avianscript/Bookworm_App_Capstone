@@ -22,7 +22,7 @@
             <button type="submit" v-on:click.prevent="submitReadingActivity()">Submit Reading Activity</button>
         </form>
          <div class="bookscompleted">
-            <p>{{ this.$store.state.bookCompleted }}</p>
+             <record-reading/>
         </div>
     </div>
 
@@ -32,8 +32,10 @@
 </template>
 
 <script>
-import BookService from '../services/BookService'
+import BookService from '../services/BookService';
+import RecordReading from '@/components/RecordReading.vue';
 export default {
+  components: { RecordReading },
     name: 'the-profile',
   
 
