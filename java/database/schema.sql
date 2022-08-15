@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS book (
 	rating varchar(2) NULL,
 	genre varchar(50) NULL,
 	format varchar(50) DEFAULT 'PAPER',
+	UNIQUE(isbn),
 
 	CONSTRAINT PK_bookid PRIMARY KEY (book_id)
 );
@@ -47,7 +48,8 @@ CREATE TABLE IF NOT EXISTS public.users
     booksread integer DEFAULT 0,
     status smallint DEFAULT 1,
     CONSTRAINT pk_user PRIMARY KEY (user_id),
-    CONSTRAINT users_username_key UNIQUE (username)
+    CONSTRAINT users_username_key UNIQUE (username),
+	UNIQUE(username)
 );
 
 
