@@ -7,6 +7,10 @@ export default {
         return axios.get(`/books`, user);
     },
 
+    listReadingDetails() {
+        return axios.get(`/reading_details`)
+    },
+
     submitReading(readingActivity) {
         return axios.post('/log_reading', readingActivity);
 

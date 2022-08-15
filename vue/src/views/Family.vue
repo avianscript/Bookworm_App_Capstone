@@ -17,13 +17,20 @@
             <p>{{this.$store.state.familyMembers}}</p>
         </div>
         <div>
+            <p>Register your family!</p>
+            <input type="text" placeholder="Family Name" v-model="familyName" v-show="disabled">
+            <input type="submit" v-on:click.prevent="registerFamily(), disabled = false" v-show="disabled">
+        </div>
+        
+        <div>
             <p>Add a child account</p>
             <form>
-                <input type="text" placeholder="Child Username">
+                <input type="text" placeholder="Child Username" v-model="child.username">
                 <br/>
-                <input type="text" placeholder="Password">
+                <input type="text" placeholder="Password" v-model="child.password">
                 <br/>
-                <input type="submit">
+                <input type="text" placeholder="Confirm Password" v-model="child.confirmPassword">
+                <input type="submit" v-on:click.prevent="registerChild()">
             </form>
         </div>
         </div>
@@ -37,16 +44,42 @@ export default {
     name: 'the-family',
     data() {
         return {
-        familyName: "Johnson"
+        familyName: "",
+        child: {
+            username: "",
+            password: "",
+            confirmPassword: "",
+            role: "ROLE_USER"
+        },
+        disabled: true
+
     }
 },
     props: ["id"],
     
     created() {
-            FamilyService.list(this.id).then(response => {
+            FamilyService.list(this.familyName).then(response => {
                 this.$store.state.familyMembers = response.data;
             })
+        },
+
+    methods: {
+        registerChild() {
+            FamilyService.registerChild(this.child).then(response => {
+                if (response.status === 201) {
+                    this.$router.push('/actioncompleted')
+            }})
+        },
+
+        registerFamily() {
+            FamilyService.registerFamily(this.familyName).then(response => {
+                if (response.status === 201) {
+                    this.$router.push('/actioncompleted')
+                }
+            })
         }
+    }
+
     }
 
 </script>

@@ -2,7 +2,7 @@
 <div id="backgroundimg">
     <img class="homebackground" src="living-room.jpg">
     <div class="home">
-    <p>Welcome, user!</p>
+    <p>Welcome, {{username}}!</p>
     </div>
     
     <div class="nav">
@@ -17,10 +17,10 @@
         <button id="addbook" v-on:click="setReadingActivitytoTrue()">Add a Book!</button>
         <form v-show="addReadingActivity" >
             <input name="isbn" type="text" placeholder="Enter ISBN" v-model="addedBook.isbn"/>
-            <button v-on:click="submitAddedBook()">Lookup and Add Book</button>
+            <button v-on:click.prevent="submitAddedBook()">Lookup and Add Book</button>
         </form>
-         <div class="bookAdded">
-            <p>{{ this.$store.state.bookAdded }}</p>
+         <div class="bookAdded" v-for="book in this.$store.state.bookCompleted" v-bind:key="book.isbn">
+            <p>{{ book.book_name }}</p>
         </div>
     </div>
 
@@ -51,14 +51,18 @@ export default {
         submitAddedBook() {
             BookService
             .submitBook(this.addedBook.isbn).then(response => {
-                this.$store.state.bookAdded = response.data;
+
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
                 }
         })},
     
     },
-
+    created() {
+            BookService.list(this.user).then(response => {
+                this.$store.state.bookCompleted = response.data;
+            })
+        }
 }
 
 </script>
@@ -67,7 +71,7 @@ export default {
 <style scoped>
 
 .bookAdded {
-    height:50%;
+    height:20px;
     width: 50%;
     background-color: #22162B;
     position:relative;

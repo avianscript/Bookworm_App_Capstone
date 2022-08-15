@@ -27,4 +27,8 @@
   url(./fonts/Pangolin-Regular.ttf) format("truetype");
 }
 
+body {
+  cursor: url(/public/worm.png), auto;
+}
+
 </style>

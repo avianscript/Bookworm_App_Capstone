@@ -18,8 +18,10 @@ if(currentToken != null) {
 
 export default new Vuex.Store({
   state: {
-    familyMembers: ['Alexa'],
-    bookCompleted: {
+    familyMembers: {
+
+    },
+    readingCompleted: {
       
     },
     bookAdded: {
