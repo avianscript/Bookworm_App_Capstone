@@ -33,6 +33,13 @@
                 <input type="submit" v-on:click.prevent="registerChild()">
             </form>
         </div>
+        <div>
+            <form>
+                <input type="text" placeholder="ID of Family Member" v-model="newFamilyMember.user_id">
+                <input type="text" placeholder="ID of Family" v-model="newFamilyMember.family_id">
+                <input type="submit" v-on:click.prevent="addFamilyMember()">
+            </form>
+        </div>
         </div>
     </div>
 </template>
@@ -51,14 +58,18 @@ export default {
             confirmPassword: "",
             role: "ROLE_USER"
         },
-        disabled: true
+        disabled: true,
+        newFamilyMember: {
+            user_id: "",
+            family_id: ""
+        }
 
     }
 },
     props: ["id"],
     
     created() {
-            FamilyService.list(this.familyName).then(response => {
+            FamilyService.list().then(response => {
                 this.$store.state.familyMembers = response.data;
             })
         },
@@ -75,6 +86,14 @@ export default {
             FamilyService.registerFamily(this.familyName).then(response => {
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
+                }
+            })
+        },
+
+        addFamilyMember() {
+            FamilyService.addToFamilyAccount(this.username).then(response => {
+                if (response.status === 201) {
+                    this.$$router.push('/actioncompleted')
                 }
             })
         }
