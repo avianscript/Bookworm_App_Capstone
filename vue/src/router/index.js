@@ -7,6 +7,8 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import Family from '../views/Family.vue'
 import Profile from '../views/Profile.vue'
+import ActionCompleted from '../views/ActionCompleted.vue'
+import ReadingList from '../views/ReadingList.vue'
 
 Vue.use(Router)
 
@@ -27,6 +29,14 @@ const router = new Router({
       path: '/',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/actioncompleted',
+      name: 'action-completed',
+      component: ActionCompleted,
       meta: {
         requiresAuth: true
       }
@@ -67,6 +77,14 @@ const router = new Router({
       path: "/profile/ :username",
       name: "profile",
       component: Profile,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/readinglist/:username",
+      name: "readingList",
+      component: ReadingList,
       meta: {
         requiresAuth: true
       }

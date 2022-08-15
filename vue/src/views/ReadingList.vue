@@ -7,22 +7,20 @@
     
     <div class="nav">
     <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
-    <router-link class="familylink" :to="{ name: 'family'}">Family</router-link>
+    <p><router-link class="familylink" :to="{ name: 'family'}">Family</router-link></p>
     <p><router-link class="readinglistlink" :to="{ name: 'readingList' }">Reading List</router-link></p>
     <p>Prizes</p>
     </div>
 
      <div class="profilewindow">
-        <h3>Welcome to your profile!</h3>
-        <button id="recordreading" v-on:click="setReadingActivitytoTrue()">Add Reading Activity</button>
+        <h3>Welcome to your Books!</h3>
+        <button id="addbook" v-on:click="setReadingActivitytoTrue()">Add a Book!</button>
         <form v-show="addReadingActivity" >
-            <input name="userName" type="text" v-model="readingActivity.username"/>
-            <input name="minutes_read" type="number" v-model="readingActivity.minutes_read" />
-            <input name="isbn" type="text" v-model="readingActivity.isbn"/>
-            <button type="submit" v-on:click.prevent="submitReadingActivity()">Submit Reading Activity</button>
+            <input name="isbn" type="text" placeholder="Enter ISBN" v-model="addedBook.isbn"/>
+            <button v-on:click="submitAddedBook()">Lookup and Add Book</button>
         </form>
-         <div class="bookscompleted">
-            <p>{{ this.$store.state.bookCompleted }}</p>
+         <div class="bookAdded">
+            <p>{{ this.$store.state.bookAdded }}</p>
         </div>
     </div>
 
@@ -34,47 +32,41 @@
 <script>
 import BookService from '../services/BookService'
 export default {
-    name: 'the-profile',
+    name: 'reading-list',
   
 
     data() {
         return {
           addReadingActivity: false,
-          readingActivity: {
-              username: "", 
-              minutes_read: "",
-              isbn: ""
-          }
-    }
+            addedBook: {
+            isbn: ""
+        }
+        }
 },
     methods: {
         setReadingActivitytoTrue() {
             this.addReadingActivity = true;
         },
 
-        submitReadingActivity() {
+        submitAddedBook() {
             BookService
-            .submitReading(this.readingActivity).then( response => {
+            .submitBook(this.addedBook.isbn).then(response => {
+                this.$store.state.bookAdded = response.data;
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
                 }
-            })
-        }
-    },
-    props: ["user"],
+        })},
     
-    created() {
-            BookService.list(this.user).then(response => {
-                this.$store.state.bookCompleted = response.data;
-            })
-        }
-    }
+    },
+
+}
+
 </script>
 
 
 <style scoped>
 
-.bookscompleted {
+.bookAdded {
     height:50%;
     width: 50%;
     background-color: #22162B;
@@ -91,5 +83,6 @@ export default {
     background: rgba(114,78,145,0.7);
     height:70vh;
     width: 70vw;
+
 }
 </style>

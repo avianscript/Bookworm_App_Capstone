@@ -8,7 +8,7 @@
   <div class="nav">
     <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
     <router-link class="familylink" :to="{ name: 'family'}">Family</router-link>
-    <p>Reading List</p>
+    <p><router-link class="readinglistlink" :to="{ name: 'readingList' }">Reading List</router-link></p>
     <p>Prizes</p>
   </div>
   </div>
@@ -62,7 +62,8 @@ height: 90vh;
   top: 10px;
 }
 
-.profilelink {
+.profilelink,
+.readinglistlink {
       color: #F8C630;
 
 }
