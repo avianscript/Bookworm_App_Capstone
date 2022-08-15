@@ -1,8 +1,8 @@
 <template>
-  <div class="card" v-bind:class="{ read: book.read }">
+  <div v-on:click="selectBook()" class="card" v-bind:class="{ selected: isSelected }">
     <img v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
     <h2 class="book-title">{{ book.title }}</h2>
-    <h1 class="book-author">{{ book.author }}</h1>
+    <h1 class="book-author">{{ book.author }}</h1> 
   </div>
 </template>
 
@@ -14,10 +14,18 @@ export default {
     },
     data() {
         return {
-            url: "/book/" + this.book.isbn
+            url: "/book/" + this.book.isbn,
+            isSelected: false
         }
     },
     methods: {
+        selectBook(){
+            if(this.isSelected){
+                this.isSelected = false;
+            } else {
+                this.isSelected = true;
+            }
+        }
         // viewBook(){
         //     this.$router.push({ name: 'book-detail', params: { isbn: this.book.isbn } });
         // },
@@ -34,6 +42,7 @@ export default {
 </script>
 
 <style scoped>
+
 .card {
     /* border: 2px solid white; */
     /* border-radius: 10px;
@@ -44,8 +53,10 @@ export default {
     border-radius: 2rem;
 }
 
-.card.read {
-    background-color: lightgray;
+.card.selected {
+    background-color: rgba(211,211,211,0.1);
+    border: 2px solid white;
+    border-radius: 1px;
 }
 
 .card .book-title {
