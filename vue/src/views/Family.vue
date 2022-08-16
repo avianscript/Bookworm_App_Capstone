@@ -21,8 +21,10 @@
       <p>Prizes</p>
     </div>
     <div class="familywindow">
+      <div class="headline">
       <h3 v-show="familyName == ''">Please register your family...</h3>
       <h3 v-show="familyName != ''">The {{ familyName }} family</h3>
+      </div>
       <div class="familymembers">
         <p
           v-for="member in this.$store.state.familyMembers"
@@ -31,8 +33,8 @@
           {{ member.username + familyReading }}
         </p>
       </div>
-      <div v-if="!registered">
-        <p>Register your family!</p>
+      <div v-if="!isRegistered">
+        <p id="RegisterFamily">Register your family!</p>
         <input
           type="text"
           placeholder="Family Name"
@@ -47,7 +49,7 @@
       </div>
 
       <div>
-        <p>Add a child account</p>
+        <p id="AddChild">Add a child account</p>
         <form>
           <input
             type="text"
@@ -67,11 +69,11 @@
       </div>
 
       <div>
-        <p>Add a family member</p>
+        <p id="AddFamily">Add a family member</p>
         <form>
           <input
             type="text"
-            placeholder="ID of Family Member"
+            placeholder="Child Username"
             v-model="newFamilyMember.username"
           />
           <!-- <input type="text" placeholder="ID of Family" v-model="newFamilyMember.family_id"> -->
@@ -110,18 +112,24 @@ export default {
   created() {
     FamilyService.getFamilyName().then((response) => {
       this.familyName = response.data;
-      if (this.familyName) {
-        this.registered = true;
-        FamilyService.list(this.user).then((response) => {
+        FamilyService.list(this.$store.state.user).then((response) => {
           this.$store.state.familyMembers = response.data;
         });
       }
-    }),
+    ),
 
      FamilyService.getReadingActivity(this.$store.state.familyMembers).then((response) => {
         this.familyReading = response.data;
       })
   },
+
+  computed:  {
+    isRegistered() {
+     if (this.$store.state.familyMembers.length != 0) {
+      return true} else {
+        return false
+      }
+  }},
 
   methods: {
     registerChild() {
@@ -154,6 +162,14 @@ export default {
 </script>
 
 <style>
+
+#RegisterFamily,
+#AddChild,
+#AddFamily {
+   color: #f8c630;
+   font-size: 20px;
+}
+
 .familywindow {
   text-align: center;
   position: absolute;
@@ -166,6 +182,7 @@ export default {
 
 h3 {
   font-size: 30px;
+  color: #f8c630;
 }
 
 .familymembers {
