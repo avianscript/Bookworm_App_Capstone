@@ -39,15 +39,15 @@ public class JdbcBookDao implements BookDao{
 
         String bookCountSQL = "Select book_id from book where isbn = ?";
         String recordCountSQL = ("Select count(*) from book_user where book_id = ? and user_id = ?");
-        Integer curBookId;
-        Integer bookUserExists;
+        Integer curBookId = 0;
+        Integer bookUserExists = 0;
         String sql;
 
         try {
             curBookId = jdbcTemplate.queryForObject(bookCountSQL, Integer.class, book.getIsbn());
 //            System.out.println("loop0  BookId : " + curBookId + " -- UserId : " + userId);
         }catch (DataAccessException e) {
-            return;
+//            return;
         }
 
         try {
@@ -56,7 +56,7 @@ public class JdbcBookDao implements BookDao{
 
         }catch (DataAccessException e) {
             e.getMessage();
-            return;
+//            return;
         }
 
 
