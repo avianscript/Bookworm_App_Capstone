@@ -18,6 +18,8 @@ public interface UserDao {
 
     void createFamilyAccount(String familyName, int userId);
 
+    String getFamilyNameForUsername(String username);
+
     void addFamilyMember(int curId, int addedId);
 
     void updateBookStatus(int userId, int bookId, String status);

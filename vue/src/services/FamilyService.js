@@ -3,6 +3,10 @@ import axios from 'axios';
 
 export default {
 
+    getFamilyName() {
+        return axios.get(`/family_name`);
+    },
+
     list(username) {
         return axios.get(`/family_members`, username);
     },

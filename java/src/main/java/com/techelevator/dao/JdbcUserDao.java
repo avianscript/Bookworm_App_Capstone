@@ -105,6 +105,20 @@ public class JdbcUserDao implements UserDao {
         return;
     }
 
+
+    @Override
+    public String getFamilyNameForUsername(String username) {
+        String sql = "SELECT family_name from users u\n" +
+                "JOIN family_user ON family_user.user_id = u.user_id\n" +
+                "JOIN family_account fa ON fa.family_id = family_user.family_id \n" +
+                "where u.username = ?";
+        try {
+            return jdbcTemplate.queryForObject(sql, String.class, username);
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+
+    }
     @Override
     public void addFamilyMember(int curId, int addedId) {
         String sql = "SELECT family_id FROM family_user WHERE user_id = ?";

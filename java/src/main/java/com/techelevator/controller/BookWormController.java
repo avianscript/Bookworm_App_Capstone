@@ -50,6 +50,12 @@ public class BookWormController {
         parentService.createFamilyAccount(familyName, curUser.getName());
     }
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/family_name")
+    public String getFamilyForId(Principal curUser) {
+        return parentService.getFamilyForUser(curUser.getName());
+    }
+
 //    @PreAuthorize("hasRole('ROLE_ADMIN')")
 //    @ResponseStatus(HttpStatus.ACCEPTED)
 //    @RequestMapping(value = "/add_family_member", method = RequestMethod.POST)

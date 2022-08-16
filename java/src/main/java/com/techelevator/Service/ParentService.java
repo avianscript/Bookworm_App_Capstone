@@ -19,6 +19,10 @@ public class ParentService {
         userDao.createFamilyAccount(familyName, curId);
     }
 
+    public String getFamilyForUser(String curUsername) {
+        return userDao.getFamilyNameForUsername(curUsername);
+    }
+
     public void addFamilyMember(String username, String curUsername){
         int curId = userDao.findIdByUsername(curUsername);
         int addedId = userDao.findIdByUsername(username);
