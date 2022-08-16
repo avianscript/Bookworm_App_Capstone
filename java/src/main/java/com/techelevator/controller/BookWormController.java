@@ -76,9 +76,11 @@ public class BookWormController {
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/add_book", method = RequestMethod.POST)
-    public void addBook(@RequestBody String Isbn, Principal curUser){
-        String newString = Isbn.replaceAll("=", "");
-        bookService.createBook(newString, curUser.getName());
+    public void addBook(@RequestBody Book newBook, Principal curUser){
+//        String newString = Isbn.replaceAll("=", "");
+//        String isbn = newBook.getIsbn();
+//        bookService.createBook(isbn, curUser.getName());
+        bookService.createBook(newBook, curUser.getName());
     }
 
     @PreAuthorize("isAuthenticated()")

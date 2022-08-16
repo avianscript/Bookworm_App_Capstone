@@ -4,11 +4,11 @@ public class Book {
     private int book_id;
     private String book_name;
     private String isbn;
-    private String description;
+    private String description = "";
     private String author;
     private int numberofpages;
-    private String rating;
-    private String genre;
+    private String rating = "";
+    private String genre = "";
     private String format;
 
     public int getBook_id() {
