@@ -20,20 +20,73 @@ public class JdbcBookDao implements BookDao{
 
     @Override
     public void createBook(Book book, int userId){
-        String sql = "INSERT INTO book (book_name, isbn, description, author, numberofpages, rating, genre) values (?, ?, ?, ?, ?, ?,?) RETURNING book_id";
+//        Original code - 8/16/22
+//        String sql = "INSERT INTO book (book_name, isbn, description, author, numberofpages, rating, genre) values (?, ?, ?, ?, ?, ?,?) RETURNING book_id";
+//
+//        Integer bookId;
+//        try {
+//            bookId = jdbcTemplate.queryForObject(sql, Integer.class, book.getBook_name(), book.getIsbn(), book.getDescription(), book.getAuthor(), book.getNumberofpages(), book.getRating(), book.getGenre());
+//        } catch (DataAccessException e) {
+//            return;
+//        }
+//
+//        sql = "INSERT INTO book_user (book_id, user_id) values (?, ?)";
+//        try {
+//            jdbcTemplate.update(sql, bookId, userId);
+//        } catch (DataAccessException e) {
+//            return;
+//        }
 
-        Integer bookId;
+        String bookCountSQL = "Select book_id from book where isbn = ?";
+        String recordCountSQL = ("Select count(*) from book_user where book_id = ? and user_id = ?");
+        Integer curBookId;
+        Integer bookUserExists;
+        String sql;
+
         try {
-            bookId = jdbcTemplate.queryForObject(sql, Integer.class, book.getBook_name(), book.getIsbn(), book.getDescription(), book.getAuthor(), book.getNumberofpages(), book.getRating(), book.getGenre());
-        } catch (DataAccessException e) {
+            curBookId = jdbcTemplate.queryForObject(bookCountSQL, Integer.class, book.getIsbn());
+//            System.out.println("loop0  BookId : " + curBookId + " -- UserId : " + userId);
+        }catch (DataAccessException e) {
             return;
         }
 
-        sql = "INSERT INTO book_user (book_id, user_id) values (?, ?)";
         try {
-            jdbcTemplate.update(sql, bookId, userId);
-        } catch (DataAccessException e) {
+            bookUserExists = jdbcTemplate.queryForObject(recordCountSQL, Integer.class, book.getBook_id(), userId);
+//            System.out.println("loopA  BookId : " + curBookId + " -- Book_User Record count : " + bookUserExists + " -- UserId : " + userId);
+
+        }catch (DataAccessException e) {
+            e.getMessage();
             return;
+        }
+
+
+        if(curBookId == 0){
+//            System.out.println("loop1  BookId : " + curBookId + " -- Book_User Record count : " + bookUserExists + " -- UserId : " + userId);
+            Integer bookId;
+            sql = "INSERT INTO book (book_name, isbn, description, author, numberofpages, rating, genre) values (?, ?, ?, ?, ?, ?,?) RETURNING book_id";
+
+            try {
+                bookId = jdbcTemplate.queryForObject(sql, Integer.class, book.getBook_name(), book.getIsbn(), book.getDescription(), book.getAuthor(), book.getNumberofpages(), book.getRating(), book.getGenre());
+            } catch (DataAccessException e) {
+                return;
+            }
+
+            sql = "INSERT INTO book_user (book_id, user_id) values (?, ?)";
+            try {
+                jdbcTemplate.update(sql, bookId, userId);
+            } catch (DataAccessException e) {
+                return;
+            }
+
+        }else if (curBookId != 0 && bookUserExists == 0) {
+//            System.out.println("loop2  BookId : " + curBookId + " -- Book_User Record count : " + bookUserExists + " -- UserId : " + userId);
+            sql = "INSERT INTO book_user (book_id, user_id) values (?, ?)";
+            try {
+                jdbcTemplate.update(sql, curBookId, userId);
+            } catch (DataAccessException e) {
+                return;
+            }
+
         }
     }
 
