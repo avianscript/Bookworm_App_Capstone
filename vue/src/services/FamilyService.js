@@ -22,5 +22,9 @@ export default {
 
     addToFamilyAccount(id) {
         return axios.post(`/add_family_member`, id)
+    },
+
+    getReadingActivity(id) {
+        return axios.get(`/check_reading_activity`, id)
     }
 }

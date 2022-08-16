@@ -21,17 +21,17 @@
       <p>Prizes</p>
     </div>
     <div class="familywindow">
-      <h3 v-show="familyName == ''">Tell us about your family...</h3>
+      <h3 v-show="familyName == ''">Please register your family...</h3>
       <h3 v-show="familyName != ''">The {{ familyName }} family</h3>
       <div class="familymembers">
         <p
           v-for="member in this.$store.state.familyMembers"
           v-bind:key="member.user_id"
         >
-          {{ member.username }}
+          {{ member.username + familyReading }}
         </p>
       </div>
-      <div v-if="familyName == ''">
+      <div v-if="!registered">
         <p>Register your family!</p>
         <input
           type="text"
@@ -89,6 +89,8 @@ export default {
   name: "the-family",
   data() {
     return {
+      familyReading: "",
+      registered: false,
       username: this.$store.state.user.username,
       familyName: "",
       child: {
@@ -109,26 +111,31 @@ export default {
     FamilyService.getFamilyName().then((response) => {
       this.familyName = response.data;
       if (this.familyName) {
+        this.registered = true;
         FamilyService.list(this.user).then((response) => {
           this.$store.state.familyMembers = response.data;
         });
       }
-    });
+    }),
+
+     FamilyService.getReadingActivity(this.$store.state.familyMembers).then((response) => {
+        this.familyReading = response.data;
+      })
   },
 
   methods: {
     registerChild() {
-      FamilyService.registerChild(this.child).then((response) => {
-        if (response.status === 201) {
-          this.$router.push("/actioncompleted");
-        }
-      });
-    },
+      FamilyService.registerChild(this.child);
+      this.child.username = "";
+      this.child.password = "";
+      this.child.confirmPassword = "";
+        },
+  
 
     registerFamily() {
       FamilyService.registerFamily(this.familyName).then((response) => {
         if (response.status === 201) {
-          this.$router.push("/actioncompleted");
+          this.registered = true;
         }
       });
     },
@@ -137,12 +144,12 @@ export default {
       FamilyService.addToFamilyAccount(this.newFamilyMember).then(
         (response) => {
           if (response.status === 201) {
-            this.$router.push("/actioncompleted");
+            this.$router.push("/");
           }
         }
-      );
-    },
-  },
+      )
+    }
+  }
 };
 </script>
 
