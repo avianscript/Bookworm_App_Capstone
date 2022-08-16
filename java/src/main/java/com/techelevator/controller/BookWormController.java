@@ -6,6 +6,7 @@ import com.techelevator.Service.ReadingService;
 import com.techelevator.Service.UserService;
 import com.techelevator.dao.UserDao;
 import com.techelevator.model.Book;
+import com.techelevator.model.Family;
 import com.techelevator.model.ReadingActivity;
 import com.techelevator.model.RegisterUserDTO;
 import com.techelevator.model.Reading;
@@ -46,8 +47,8 @@ public class BookWormController {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/register_family_account", method = RequestMethod.POST)
-    public void createFamilyAccount(@Valid @RequestBody String familyName, Principal curUser) {
-        parentService.createFamilyAccount(familyName, curUser.getName());
+    public void createFamilyAccount(@Valid @RequestBody Family familyInfo, Principal curUser) {
+        parentService.createFamilyAccount(familyInfo.getFamilyName(), curUser.getName());
     }
 
     @PreAuthorize("isAuthenticated()")
