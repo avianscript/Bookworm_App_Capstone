@@ -3,7 +3,7 @@
     <div class="imagediv">
         <img class="background" src="pexels-janko-ferlic-590493.jpg">
     <form class="form-register" @submit.prevent="register">
-      <h2 class="h3 mb-3 font-weight-normal">Create Account</h2>
+      <h2>Create Account</h2>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
@@ -110,10 +110,10 @@ export default {
   width: 100vw;
 }
 
-.imagediv{
+/* .imagediv{
   
   background-color: rgb(46,55,80);
-}
+} */
 
 .form-register{
   position:absolute;

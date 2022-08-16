@@ -93,10 +93,10 @@ export default {
   width: 100vw;
 }
 
-#imagediv{
+/* #imagediv{
   
   background-color: rgb(46,55,80);
-}
+} */
 
 .form-signin{
   position:absolute;
