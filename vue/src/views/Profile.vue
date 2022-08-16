@@ -2,7 +2,7 @@
 <div id="backgroundimg">
     <img class="homebackground" src="living-room.jpg">
     <div class="home">
-    <p>Welcome, user!</p>
+    <p>Welcome, {{ this.username }}!</p>
     </div>
     
     <div class="nav">
@@ -39,6 +39,7 @@ export default {
 
     data() {
         return {
+            username: this.$store.state.user.username,
           addReadingActivity: false,
           readingActivity: {
               username: "", 

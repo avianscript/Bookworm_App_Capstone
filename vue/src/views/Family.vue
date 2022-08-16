@@ -3,7 +3,7 @@
         <img class="homebackground" src="living-room.jpg">
     <div class="home">
     
-    <p>Welcome, user!</p>
+    <p>Welcome, {{ this.username }}!</p>
     </div>
     <div class="nav">
     <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
@@ -53,6 +53,7 @@ export default {
     name: 'the-family',
     data() {
         return {
+        username: this.$store.state.user.username,
         familyName: "",
         child: {
             username: "",
@@ -62,8 +63,7 @@ export default {
         },
         disabled: true,
         newFamilyMember: {
-            username: "",
-            // family_id: ""
+            username: ""
         }
 
     }
@@ -93,7 +93,7 @@ export default {
         },
 
         addFamilyMember() {
-            FamilyService.addToFamilyAccount(this.newFamilyMember.username).then(response => {
+            FamilyService.addToFamilyAccount(this.newFamilyMember).then(response => {
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
                 }

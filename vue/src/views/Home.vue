@@ -3,7 +3,7 @@
     <img class="homebackground" src="living-room.jpg">
   <div class="home">
     <h1>Home</h1>
-    <p>Welcome, user!</p>
+    <p>Welcome, {{username}}!</p>
   </div>
   <div class="nav">
     <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
@@ -19,7 +19,12 @@ import theFamily from '../views/Family.vue';
 
 export default {
   name: "home",
-  components: theFamily
+  components: theFamily,
+  data() {
+    return {
+      username: this.$store.state.user.username,
+    }
+  }
 };
 </script>
 

@@ -2,7 +2,7 @@
 <div id="backgroundimg">
     <img class="homebackground" src="living-room.jpg">
     <div class="home">
-    <p>Welcome, {{username}}!</p>
+    <p>Welcome, {{this.username}}!</p>
     </div>
     
     <div class="nav">
@@ -32,11 +32,13 @@
 <script>
 import BookService from '../services/BookService'
 export default {
+    
     name: 'reading-list',
   
 
     data() {
         return {
+            username: this.$store.state.user.username,
           addReadingActivity: false,
             addedBook: {
             isbn: ""
