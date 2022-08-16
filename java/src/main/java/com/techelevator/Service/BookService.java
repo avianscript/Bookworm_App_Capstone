@@ -24,20 +24,28 @@ public class BookService {
     public Book createBook(String Isbn, String curUsername){
         String url = "https://openlibrary.org/isbn/" + Isbn + ".json";
         RestTemplate restTemplate = new RestTemplate(); // Create a new client
+
+        Book newBook = new Book();
+
         BookAPI bookAPI = restTemplate.getForObject(
                 url,
                 BookAPI.class);
 
-        String worksUrl = "https://openlibrary.org" + bookAPI.getWorks().get(0).get("key") + ".json";
-        WorksAPI worksAPI = restTemplate.getForObject(worksUrl, WorksAPI.class);
+        if(bookAPI.getWorks() != null){
+            String worksUrl = "https://openlibrary.org" + bookAPI.getWorks().get(0).get("key") + ".json";
+            WorksAPI worksAPI = restTemplate.getForObject(worksUrl, WorksAPI.class);
+            newBook.setDescription(worksAPI.getDescription());
+        }
 
-        String authorUrl = "https://openlibrary.org" + bookAPI.getAuthors().get(0).get("key") + ".json";
-        AuthorAPI authorAPI = restTemplate.getForObject(authorUrl, AuthorAPI.class);
+        if(bookAPI.getAuthors() != null){
+            String authorUrl = "https://openlibrary.org" + bookAPI.getAuthors().get(0).get("key") + ".json";
+            AuthorAPI authorAPI = restTemplate.getForObject(authorUrl, AuthorAPI.class);
+            newBook.setAuthor(authorAPI.getName());
+        }
 
-        Book newBook = new Book();
+
+
         newBook.setNumberofpages(bookAPI.getNumber_of_pages());
-        newBook.setAuthor(authorAPI.getName());
-        newBook.setDescription(worksAPI.getDescription());
         newBook.setBook_name(bookAPI.getTitle());
         newBook.setIsbn(Isbn);
 

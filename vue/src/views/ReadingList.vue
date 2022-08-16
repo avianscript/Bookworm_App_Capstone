@@ -52,7 +52,7 @@ export default {
 
         submitAddedBook() {
             BookService
-            .submitBook(this.addedBook.isbn).then(response => {
+            .submitBook(this.addedBook).then(response => {
 
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
