@@ -17,7 +17,11 @@
         <button id="addbook" v-on:click="setReadingActivitytoTrue()">Add a Book!</button>
         <form v-show="addReadingActivity" >
             <input name="isbn" type="text" placeholder="Enter ISBN" v-model="addedBook.isbn"/>
-            <button v-on:click.prevent="submitAddedBook()">Lookup and Add Book</button>
+            <input name="title" type="text" placeholder="Enter title" v-model="addedBook.book_name"/>
+            <input name="author" type="text" placeholder="Enter author" v-model="addedBook.author"/>
+            <input name="pages" type="number" placeholder="Enter number of pages" v-model="addedBook.numberofpages"/>
+            <input name="format" type="text" placeholder="Enter book format" v-model="addedBook.format"/>
+            <button v-on:click.prevent="submitAddedBook()">Add Book</button>
         </form>
          <div class="bookAdded" v-for="book in this.$store.state.bookCompleted" v-bind:key="book.isbn">
             <p>{{ book.book_name + ", " + book.author + ", " + book.isbn }}</p>
@@ -39,10 +43,14 @@ export default {
     data() {
         return {
             username: this.$store.state.user.username,
-          addReadingActivity: false,
+            addReadingActivity: false,
             addedBook: {
-            isbn: ""
-        }
+                book_name: "",
+                isbn: "",
+                author: "",
+                numberofpages: "",
+                format: ""
+            }
         }
 },
     methods: {
