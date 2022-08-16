@@ -30,10 +30,14 @@ export default new Vuex.Store({
     bookCompleted: {
 
     },
+    selectedBook: "",
     token: currentToken || '',
     user: currentUser || {}
   },
   mutations: {
+    SET_SELECTED_BOOK(state, payload){
+      state.selectedBook = payload;
+    },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;
       localStorage.setItem('token', token);

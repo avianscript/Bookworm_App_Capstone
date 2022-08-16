@@ -13,17 +13,15 @@
     </div>
 
      <div class="profilewindow">
-        <h3>Welcome to your profile!</h3>
-        <button id="recordreading" v-on:click="setReadingActivitytoTrue()">Add Reading Activity</button>
+        <!-- <h3>Welcome to your profile!</h3> -->
+        <!-- <button id="recordreading" v-on:click="setReadingActivitytoTrue()">Add Reading Activity</button> -->
         <form v-show="addReadingActivity" >
             <input name="userName" type="text" v-model="readingActivity.username"/>
             <input name="minutes_read" type="number" v-model="readingActivity.minutes_read" />
             <input name="isbn" type="text" v-model="readingActivity.isbn"/>
             <button type="submit" v-on:click.prevent="submitReadingActivity()">Submit Reading Activity</button>
         </form>
-         <div class="bookscompleted">
              <record-reading/>
-        </div>
     </div>
 
  
@@ -78,7 +76,7 @@ export default {
 
 .bookscompleted {
     height:50%;
-    width: 50%;
+    width: 70%;
     background-color: #22162B;
     position:relative;
     margin: 0 auto;
@@ -90,8 +88,9 @@ export default {
     position:absolute;
     top:50px;
     left:18%;
-    background: rgba(114,78,145,0.7);
-    height:70vh;
+    background: rgba(114,78,145,.95);
+    /* background: #22162B; */
+    height:88vh;
     width: 70vw;
 }
 </style>
