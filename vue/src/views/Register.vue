@@ -74,6 +74,10 @@ export default {
         this.registrationErrors = true;
         this.registrationErrorMsg = 'Password & Confirm Password do not match.';
       } else {
+        
+        // set ADMIN role by default
+        this.user.role = 'ROLE_ADMIN';
+
         authService
           .register(this.user)
           .then((response) => {

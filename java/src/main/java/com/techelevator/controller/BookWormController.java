@@ -50,12 +50,21 @@ public class BookWormController {
         parentService.createFamilyAccount(familyName, curUser.getName());
     }
 
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @ResponseStatus(HttpStatus.ACCEPTED)
+//    @RequestMapping(value = "/add_family_member", method = RequestMethod.POST)
+//    public void addFamilyMember(@RequestBody String username, Principal curUser){
+//        parentService.addFamilyMember(username, curUser.getName());
+//    }
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @ResponseStatus(HttpStatus.ACCEPTED)
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/add_family_member", method = RequestMethod.POST)
-    public void addFamilyMember(@RequestBody String username, Principal curUser){
-        parentService.addFamilyMember(username, curUser.getName());
+    public void addFamilyMember(@RequestBody User child, Principal curUser) {
+        parentService.addFamilyMember(child.getUsername(), curUser.getName());
     }
+
+
 
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.CREATED)

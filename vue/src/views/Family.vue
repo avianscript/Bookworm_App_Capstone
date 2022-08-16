@@ -93,7 +93,7 @@ export default {
         },
 
         addFamilyMember() {
-            FamilyService.addToFamilyAccount(this.newFamilyMember.username).then(response => {
+            FamilyService.addToFamilyAccount(this.newFamilyMember).then(response => {
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
                 }
