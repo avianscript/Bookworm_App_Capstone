@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export default {
 
-    list() {
-        return axios.get(`/family_members`);
+    list(username) {
+        return axios.get(`/family_members`, username);
     },
 
     registerChild(id) {
