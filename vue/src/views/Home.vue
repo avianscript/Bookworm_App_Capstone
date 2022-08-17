@@ -51,12 +51,13 @@ height: 90vh;
 }
 
 .nav {
-  margin-top: 20px;
+  margin-top: 0px;
   position: absolute;
   top: 150px;
   left: 10%;
   color: #F8C630;
   font-family: "Mouse Memoirs", sans-serif;
+  font-size: 25px;
 
 }
 
