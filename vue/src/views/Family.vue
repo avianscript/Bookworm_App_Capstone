@@ -23,7 +23,7 @@
     <div class="familywindow">
       <div class="headline">
       <h3 v-show="familyName == ''">Please register your family...</h3>
-      <h3 v-show="familyName != ''">The {{ familyName }} family</h3>
+      <h3 v-show="familyName != ''">The {{ family.familyName }} family</h3>
       </div>
       <div class="familymembers">
         <p
@@ -38,7 +38,7 @@
         <input
           type="text"
           placeholder="Family Name"
-          v-model="familyName"
+          v-model="family.familyName"
           v-show="disabled"
         />
         <input
@@ -94,7 +94,9 @@ export default {
       familyReading: "",
       registered: false,
       username: this.$store.state.user.username,
-      familyName: "",
+      family: {
+        familyName: ""
+      },
       child: {
         username: "",
         password: "",
@@ -141,8 +143,9 @@ export default {
   
 
     registerFamily() {
-      FamilyService.registerFamily(this.familyName).then((response) => {
+      FamilyService.registerFamily(this.family).then((response) => {
         if (response.status === 201) {
+          this.$store.state.familyMembers = response.data;
           this.registered = true;
         }
       });

@@ -88,11 +88,11 @@ public class JdbcUserDao implements UserDao {
     @Override
     public void createFamilyAccount(String familyName, int userId) {
         String sql = "INSERT INTO family_account (family_name) values (?) RETURNING family_id";
-        Integer familyId;
+        Integer familyId = 0;
         try {
             familyId = jdbcTemplate.queryForObject(sql, Integer.class, familyName);
         } catch (DataAccessException e) {
-            return;
+//            return;
         }
 
         sql = "INSERT INTO family_user (family_id, user_id) values (?, ?)";

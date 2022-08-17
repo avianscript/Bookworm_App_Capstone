@@ -15,8 +15,7 @@ export default {
         return axios.post(`/register_child`, id)
     },
 
-    registerFamily(familyName) {
-        const family = { familyName: familyName} 
+    registerFamily(family) {
         return axios.post(`/register_family_account`, family);
     },
 
