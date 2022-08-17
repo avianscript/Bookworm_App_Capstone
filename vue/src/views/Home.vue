@@ -29,10 +29,11 @@ export default {
 </script>
 
 <style>
-  .homebackground{
-height: 90vh;
-  width: 100vw;
-  }
+   .homebackground {
+      width: 90vw;
+      height: 100vh;
+      padding-left: 4%;
+    } 
 
   h1 {
   margin: 10px;

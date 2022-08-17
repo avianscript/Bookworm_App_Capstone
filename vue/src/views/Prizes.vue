@@ -2,7 +2,6 @@
 <div>
     <img class="homebackground" src="living-room.jpg">
         <div class="home">
-            <h1>Home</h1>
             <p>Welcome, {{username}}!</p>
         </div>
         <div class="nav">
@@ -12,8 +11,14 @@
             <p><router-link class="prizeslink" :to="{ name: 'prizes' }">Prizes</router-link></p>
         </div>
          <div class="prizewindow">
+             <h1 class="pageheading">Prizes coming soon!</h1>
         </div>
-        <div class="familymembers">
+         <div class="prizebody">
+             <p>Prizes will be displayed here!</p>
+             <img id="trophy" src="trophy1.png">
+             <img id="trophy" src="trophy1.png">
+             <img id="trophy" src="trophy1.png">
+
         </div>
 </div>
 </template>   
@@ -45,13 +50,18 @@
   font-size: 150%;
 }
 
-.familymembers {
-  height: 50%;
-  width: 50%;
-  background-color: #22162b;
-  position: relative;
-  margin: 0 auto;
-  color: white;
+.prizebody {
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    top: 17%;
+    left: 28%;
+    background-color: #22162b;
+    margin: 0 auto;
+    color: white;
+    font-family: "Mouse Memoirs", sans-serif;
+    font-size: 1.8em;
+    text-align: center;
 }
 
 .prizewindow {
@@ -62,6 +72,17 @@
   background: rgba(114, 78, 145, 0.7);
   height: 70vh;
   width: 70vw;
+}
+
+.pageheading {
+    font-family: "Mouse Memoirs", sans-serif;
+    font-size: 4em;
+    padding-top: 1.5%;
+    color: #F8C630;
+}
+
+#trophy {
+    height: 50%;
 }
 
 </style>
