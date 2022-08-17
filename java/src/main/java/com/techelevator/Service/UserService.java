@@ -33,6 +33,10 @@ public class UserService {
         return userDao.getMinutesRead(userId);
     }
 
+    public int minutesReadFromISBN(int userId, String ISBN){
+        return userDao.minutesReadFromISBN(userId, ISBN);
+    }
+
     public List<User> familyMembers(int userId){
         return userDao.familyMembers(userId);
     }

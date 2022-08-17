@@ -122,6 +122,13 @@ public class BookWormController {
 
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/minutes_read", method = RequestMethod.GET)
+    public int minutesReadFromISBN(@RequestBody Reading reading){
+        return userService.minutesReadFromISBN(userDao.findIdByUsername(reading.getUsername()), reading.getIsbn());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = "/currently_reading", method = RequestMethod.GET)
     public List<Book> currentlyReading(Principal user){
         return userService.currentlyReading(userDao.findIdByUsername(user.getName()));

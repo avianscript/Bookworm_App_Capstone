@@ -9,6 +9,7 @@ import com.techelevator.model.Book;
 import com.techelevator.model.UserNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.relational.core.sql.In;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -178,6 +179,12 @@ public class JdbcUserDao implements UserDao {
         Integer totalMinutes = jdbcTemplate.queryForObject(sql, Integer.class,  userId);
         return totalMinutes;
 }
+    @Override
+    public int minutesReadFromISBN(int userId, String ISBN){
+        String sql = "SELECT sum(minutes_read) as totalMinutes FROM reading_details WHERE isbn = ? AND user_id = ?";
+        Integer totalMinutes = jdbcTemplate.queryForObject(sql, Integer.class, ISBN, userId);
+        return totalMinutes;
+    }
 
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();

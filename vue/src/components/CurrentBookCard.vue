@@ -4,6 +4,7 @@
     <div v-bind:class="{ 'color-overlay': isSelected }"></div>
     <p class="centered">Minutes Read:</p>
     <form v-show="isSelected" class="centered">
+        <p>{{ readingActivity.minutes_read }}</p>
         <!-- <label for="time-read">Minutes Read:</label><br> -->
         
         <input id="submit" v-on:click.prevent="submitReadingInfo()" type="submit"/>
@@ -24,7 +25,7 @@ export default {
             url: "/book/" + this.book.isbn,
             readingActivity: {
               username: this.$store.state.user.username, 
-              minutes_read: "",
+              minutes_read: '',
               isbn: this.book.isbn
           }
         }
@@ -36,6 +37,9 @@ export default {
             } else{
                 this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', this.book.isbn)
             }
+            BookService.minutesRead(this.readingActivity).then(response => {
+                this.readingActivity.minutes_read = response.data;
+            })
             
         },
         submitReadingInfo() {

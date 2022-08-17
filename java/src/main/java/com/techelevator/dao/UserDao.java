@@ -30,6 +30,8 @@ public interface UserDao {
 
     int getMinutesRead(int userId);
 
+    int minutesReadFromISBN(int userId, String ISBN);
+
     List<Book> currentlyReading(int userId);
 
     List<User> familyMembers(int userId);

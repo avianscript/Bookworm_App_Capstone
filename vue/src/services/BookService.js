@@ -12,6 +12,9 @@ export default {
     listReadingDetails() {
         return axios.get(`/reading_details`)
     },
+    minutesRead(reading) {
+        return axios.get('/minutes_read', reading)
+    },
 
     submitReading(readingActivity) {
         return axios.post('/log_reading', readingActivity);
