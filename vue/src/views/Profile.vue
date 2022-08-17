@@ -21,7 +21,10 @@
             <input name="isbn" type="text" v-model="readingActivity.isbn"/>
             <button type="submit" v-on:click.prevent="submitReadingActivity()">Submit Reading Activity</button>
         </form>
-             <record-reading/>
+            <h2>Your Books:</h2>
+            <record-reading id="allBooks" v-bind:books="$store.state.allBooks"/>
+            <h2>Currently Reading:</h2>
+            <record-reading v-bind:books="$store.state.currentlyReading"/>
     </div>
 
  
@@ -65,15 +68,20 @@ export default {
     props: ["user"],
     
     created() {
+            BookService.listCompleted(this.user).then(response => {
+                this.$store.state.currentlyReading = response.data;
+            }),
             BookService.list(this.user).then(response => {
-                this.$store.state.bookCompleted = response.data;
+                this.$store.state.allBooks = response.data;
             })
-        }
+        },
+        
     }
 </script>
 
 
 <style scoped>
+
 
 .bookscompleted {
     height:50%;

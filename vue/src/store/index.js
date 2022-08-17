@@ -27,7 +27,10 @@ export default new Vuex.Store({
     bookAdded: {
 
     },
-    bookCompleted: {
+    currentlyReading: {
+
+    },
+    allBooks: {
 
     },
     selectedBook: "",

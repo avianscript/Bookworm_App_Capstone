@@ -1,8 +1,8 @@
 <template>
 <div>
-    <h2>Your Books:</h2>
+
     <div class="book-container">
-        <book-card v-bind:book="book" v-for="book in $store.state.bookCompleted" v-bind:key="book.isbn" />
+        <book-card v-bind:book="book" v-for="book in books" v-bind:key="book.isbn" />
     </div>
 </div>
   
@@ -13,6 +13,9 @@ import BookCard from '@/components/BookCard.vue';
 
 export default {
     name: 'reading-list',
+    props: {
+        books: Object,
+    },
     components: {
         BookCard
     }
@@ -41,6 +44,7 @@ h2 {
     overscroll-behavior-inline: contain;
     /* border: 10px solid #57386e;
     border-radius: 1px; */
-    height: 20rem;
+    height: 13rem;
+
 }
 </style>

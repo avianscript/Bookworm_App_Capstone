@@ -90,6 +90,7 @@ public class BookWormController {
         reading.setBook_id(bookService.getIdByIsbn(reading.getIsbn()));
         reading.setUser_id(userDao.findIdByUsername(reading.getUsername()));
         readingService.logReading(reading);
+        userService.updateBookStatus(reading.getUser_id(), reading.getBook_id(), "READING");
     }
 
     @PreAuthorize("isAuthenticated()")
@@ -118,6 +119,13 @@ public class BookWormController {
         return readingActivity;
 
      }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/currently_reading", method = RequestMethod.GET)
+    public List<Book> currentlyReading(Principal user){
+        return userService.currentlyReading(userDao.findIdByUsername(user.getName()));
+    }
 
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.ACCEPTED)

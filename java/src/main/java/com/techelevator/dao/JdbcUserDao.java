@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import com.techelevator.model.Book;
 import com.techelevator.model.UserNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -152,6 +153,17 @@ public class JdbcUserDao implements UserDao {
         jdbcTemplate.update(sql, status, userId, bookId);
     }
 
+    @Override
+    public List<Book> currentlyReading(int userId){
+        String sql = "SELECT * FROM book b JOIN book_user bu ON b.book_id = bu.book_id WHERE user_id = ? AND status = ?";
+        SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, userId, "READING");
+        List<Book> books = new ArrayList<>();
+        while (rows.next()){
+            books.add(mapRowToBook(rows));
+        }
+        return books;
+    }
+
 
     @Override
     public int getBooksByStatus(int userId,String status){
@@ -175,5 +187,19 @@ public class JdbcUserDao implements UserDao {
         user.setAuthorities(Objects.requireNonNull(rs.getString("role")));
         user.setActivated(true);
         return user;
+    }
+
+    private Book mapRowToBook(SqlRowSet row){
+        Book book = new Book();
+        book.setDescription(row.getString("description"));
+        book.setAuthor(row.getString("author"));
+        book.setNumberofpages(row.getInt("numberofpages"));
+        book.setBook_id(row.getInt("book_id"));
+        book.setIsbn(row.getString("isbn"));
+        book.setGenre(row.getString("genre"));
+        book.setRating(row.getString("rating"));
+        book.setFormat(row.getString("format"));
+        book.setBook_name(row.getString("book_name"));
+        return book;
     }
 }

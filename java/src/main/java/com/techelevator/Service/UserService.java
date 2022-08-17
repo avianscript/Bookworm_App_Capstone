@@ -1,9 +1,11 @@
 package com.techelevator.Service;
 
 import com.techelevator.dao.UserDao;
+import com.techelevator.model.Book;
 import com.techelevator.model.User.User;
 import org.springframework.stereotype.Component;
 
+import java.security.Principal;
 import java.util.List;
 
 @Component
@@ -21,6 +23,10 @@ public class UserService {
     public int getBooksByStatus(int userId, String status){
         return userDao.getBooksByStatus(userId, status);
 
+    }
+
+    public List<Book> currentlyReading(int userId){
+        return userDao.currentlyReading(userId);
     }
 
     public int getMinutesRead(int userId){

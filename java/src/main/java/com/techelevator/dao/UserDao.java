@@ -1,7 +1,9 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Book;
 import com.techelevator.model.User.User;
 
+import java.security.Principal;
 import java.util.List;
 
 public interface UserDao {
@@ -27,6 +29,8 @@ public interface UserDao {
     int getBooksByStatus(int userId, String status);
 
     int getMinutesRead(int userId);
+
+    List<Book> currentlyReading(int userId);
 
     List<User> familyMembers(int userId);
 
