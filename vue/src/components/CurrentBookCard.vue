@@ -4,10 +4,10 @@
     <div v-bind:class="{ 'color-overlay': isSelected }"></div>
     <p class="centered">Minutes Read:</p>
     <form v-show="isSelected" class="centered">
-        <p>{{ readingActivity.minutes_read }}</p>
+        <p>{{ this.minutes_read }}</p>
         <!-- <label for="time-read">Minutes Read:</label><br> -->
         
-        <input id="submit" v-on:click.prevent="submitReadingInfo()" type="submit"/>
+        <button id="submit" v-on:click.prevent="markComplete()" type="submit">Mark Finished</button>
     </form>
   </div>
 </template>
@@ -23,11 +23,15 @@ export default {
     data() {
         return {
             url: "/book/" + this.book.isbn,
+            minutes_read: "",
             readingActivity: {
-              username: this.$store.state.user.username, 
-              minutes_read: '',
-              isbn: this.book.isbn
-          }
+                user_id: "",
+                book_id: "",
+                minutes_read: "",
+                username: this.$store.state.user.username, 
+                isbn: this.book.isbn
+            },
+            bookStatus: [this.book.isbn, 'READ']
         }
     },
     methods: {
@@ -37,13 +41,13 @@ export default {
             } else{
                 this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', this.book.isbn)
             }
-            BookService.minutesRead(this.readingActivity).then(response => {
-                this.readingActivity.minutes_read = response.data;
+            BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
+                this.minutes_read = response.data;
             })
             
         },
-        submitReadingInfo() {
-            BookService.submitReading(this.readingActivity).then( response => {
+        markComplete() {
+            BookService.updateBookStatus(this.bookStatus).then( response => {
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
                 }

@@ -12,10 +12,12 @@ export default {
     listReadingDetails() {
         return axios.get(`/reading_details`)
     },
-    minutesRead(reading) {
-        return axios.get('/minutes_read', reading)
+    minutesRead(username, isbn) {
+        return axios.get('/minutes_read/'+username+'/'+isbn)
     },
-
+    updateBookStatus(data){
+        return axios.put('/update_book_status', data)
+    },
     submitReading(readingActivity) {
         return axios.post('/log_reading', readingActivity);
 

@@ -23,7 +23,7 @@ export default {
         return axios.post(`/add_family_member`, id)
     },
 
-    getReadingActivity(id) {
-        return axios.get(`/check_reading_activity`, id)
+    getReadingActivity(username) {
+        return axios.get(`/check_reading_activity`, username)
     }
 }

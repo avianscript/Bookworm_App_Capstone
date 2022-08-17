@@ -27,6 +27,7 @@
             <currently-reading class="allBooks" v-bind:books="$store.state.currentlyReading"/>
     </div>
 
+
  
 </div>
    
