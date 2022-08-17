@@ -34,12 +34,16 @@ export default new Vuex.Store({
 
     },
     selectedBook: "",
+    currentlyReadingSelectedBook: "",
     token: currentToken || '',
     user: currentUser || {}
   },
   mutations: {
     SET_SELECTED_BOOK(state, payload){
       state.selectedBook = payload;
+    },
+    SET_CURRENTLY_READING_SELECTED_BOOK(state, payload){
+      state.currentlyReadingSelectedBook = payload;
     },
     SET_AUTH_TOKEN(state, token) {
       state.token = token;

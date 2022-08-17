@@ -24,7 +24,7 @@
             <h2>Your Books:</h2>
             <record-reading class="allBooks" v-bind:books="$store.state.allBooks"/>
             <h2>Currently Reading:</h2>
-            <record-reading class="allBooks" v-bind:books="$store.state.currentlyReading"/>
+            <currently-reading class="allBooks" v-bind:books="$store.state.currentlyReading"/>
     </div>
 
  
@@ -35,8 +35,9 @@
 <script>
 import BookService from '../services/BookService';
 import RecordReading from '@/components/RecordReading.vue';
+import CurrentlyReading from '@/components/CurrentlyReading.vue';
 export default {
-  components: { RecordReading },
+  components: { RecordReading, CurrentlyReading },
     name: 'the-profile',
   
 
