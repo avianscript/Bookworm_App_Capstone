@@ -27,8 +27,9 @@ export default {
 .book-container {
     background-color: #22162B;
     display: grid;
-    gap: 1rem;
+    gap: 1%;
     grid-auto-flow: column;
+
 
     overflow-x: auto;
     overscroll-behavior-inline: contain;
