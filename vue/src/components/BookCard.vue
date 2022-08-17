@@ -2,10 +2,10 @@
   <div class="card" v-bind:class="{ selected: isSelected }">
     <img v-on:click="selectBook()" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
     <div v-bind:class="{ 'color-overlay': isSelected }"></div>
-    <p class="centered">Minutes Read:</p>
+    <p class="centered">Log Reading:</p>
     <form v-show="isSelected" class="centered">
         <!-- <label for="time-read">Minutes Read:</label><br> -->
-        <input min=1 id="time-read" name="timeRead" type="number" v-model="readingActivity.minutes_read"/><br>
+        <input placeholder="Minutes" min=1 id="time-read" name="timeRead" type="number" v-model="readingActivity.minutes_read"/><br>
         <input id="submit" v-on:click.prevent="submitReadingInfo()" type="submit"/>
     </form>
   </div>

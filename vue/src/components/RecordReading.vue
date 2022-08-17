@@ -23,9 +23,12 @@ export default {
 h2 {
     background-color: #3a2649;
     color:white;
-    font-size: 2.2rem;
+    font-family: "Mouse Memoirs", sans-serif;
+    text-align: left;
+    font-size: 2.5rem;
     margin-bottom: 0;
     padding-top: 10px;
+    padding-left: 2rem;
     padding-bottom: 10px;
 }
 .book-container {
