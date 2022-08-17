@@ -25,13 +25,10 @@
       <h3 v-show="familyName == ''">Please register your family...</h3>
       <h3 v-show="familyName != ''">The {{ family.familyName }} family</h3>
       </div>
-      <div class="familymembers">
-        <p
+      <div class="familymembers"
           v-for="member in this.$store.state.familyMembers"
-          v-bind:key="member.user_id"
-        >
-          {{ member.username + familyReading }}
-        </p>
+          v-bind:key="member.user_id">
+          <p>{{ member.username + familyReading }}</p>
       </div>
       <div v-if="!isRegistered">
         <p id="RegisterFamily">Register your family!</p>
@@ -166,6 +163,7 @@ export default {
 
 <style>
 
+
 #RegisterFamily,
 #AddChild,
 #AddFamily {
@@ -184,17 +182,20 @@ export default {
 }
 
 h3 {
-  font-size: 30px;
+  font-size: 40px;
   color: #f8c630;
+  font-family: "Mouse Memoirs", sans-serif;
 }
 
 .familymembers {
-  height: 50%;
-  width: 50%;
-  background-color: #22162b;
-  position: relative;
-  margin: 0 auto;
-  color: white;
+    height:30px;
+    width: 50%;
+    background-color: #22162B;
+    position:relative;
+    margin: 0 auto;
+    color:white;
+    font-size: 20px;
+    font-family: "Mouse Memoirs", sans-serif;
 }
 
 .familylink {
