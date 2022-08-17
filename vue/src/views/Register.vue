@@ -46,7 +46,9 @@
       <router-link id="links" :to="{ name: 'login' }">Have an account?</router-link>
       </div>
     </form>
-    <h1>The Bookworm App!</h1>
+    <h1>Bookworm</h1>
+    <img id="logo" src="mini logo.png">
+
     </div>
   </div>
 </template>
@@ -110,11 +112,6 @@ export default {
   width: 100vw;
 }
 
-/* .imagediv{
-  
-  background-color: rgb(46,55,80);
-} */
-
 .form-register{
   position:absolute;
   top:30%;
@@ -124,7 +121,10 @@ export default {
   border-color: white;
   border-width: 1px;
   border-radius: 3px;
-  padding: 10px;
+  padding-right: 60px;
+  padding-left: 10px;
+  padding-top: 6px;
+  padding-bottom: 10px;
   text-decoration: none;
   background-color: rgba(69, 31, 85, 0.5);
 }
@@ -135,35 +135,47 @@ export default {
 }
 
 h1 {
+  font-size: 3em;
   position:absolute;
-  top: 25%;
-  left: 8%;
+  top: 23%;
+  left: 13%;
   color:white;
-  padding: 0,0,0,20px;
   font-family: "Pangolin", sans-serif;
 }
 
 h2 {
   margin-top:10px;
   margin-bottom: 10px;
-  font-size: 2em;
+  font-size: 3em;
   font-family: "Pangolin", sans-serif;
 }
 
 #password {
-  margin-left: 58px;
+  margin-left: 70px;
 }
 
 #username {
-  margin-left: 54px;
+  margin-left: 66px;
 }
 
 #createaccountbtn {
-  margin-left: 128px;
+  margin-left: 154px;
 }
 
 #links {
-  margin-left: 128px;
+  margin-left: 154px;
+}
+
+.sr-only {
+  font-size: 1.2em;
+}
+
+
+#logo {
+  position: absolute;
+  top: 22%;
+  left: 6.5%;
+  height: 15vh;
 }
 
 </style>
