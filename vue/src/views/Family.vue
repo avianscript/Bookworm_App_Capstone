@@ -113,7 +113,7 @@ export default {
 
   created() {
     FamilyService.getFamilyName().then((response) => {
-      this.familyName = response.data;
+      this.family.familyName = response.data;
         FamilyService.list(this.$store.state.user).then((response) => {
           this.$store.state.familyMembers = response.data;
         });
