@@ -26,7 +26,7 @@
         autofocus
       />
       <div id="loginpassword">
-      <label for="password" class="sr-only">Password: &nbsp;</label>
+      <label for="password" id="passwordtxt" class="sr-only">Password: &nbsp;</label>
       <input
         type="password"
         id="password"
@@ -44,7 +44,8 @@
     </form>
     </div>
 
-    <h1>The Bookworm App!</h1>
+    <h1>Bookworm</h1>
+    <img id="logo" src="mini logo.png">
     </div>
   </div>
 </template>
@@ -93,11 +94,6 @@ export default {
   width: 100vw;
 }
 
-#imagediv{
-  
-  background-color: rgb(46,55,80);
-}
-
 .form-signin{
   position:absolute;
   top: 30%;
@@ -107,15 +103,18 @@ export default {
   border-color: white;
   border-width: 1px;
   border-radius: 3px;
-  padding: 10px;
+  padding-right: 112px;
+  padding-left: 10px;
+  padding-top: 6px;
+  padding-bottom: 10px;
   text-decoration: none;
   background-color: rgba(69, 31, 85, 0.5);
 }
 
 h2 {
-  margin-top:10px;
-  margin-bottom: 10px;
-  font-size: 2em;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  font-size: 3em;
   font-family: "Pangolin", sans-serif;
 }
 
@@ -127,15 +126,15 @@ h2 {
 
 h1 {
   position:absolute;
-  top: 25%;
-  left: 8%;
+  font-size: 3em;
+  top: 23%;
+  left: 13%;
   color:white;
-  padding: 0,0,0,20px;
   font-family: "Pangolin", sans-serif;
 }
 
 #signinbtn {
-  margin-left: 74px;
+  margin-left: 31.5%;
 }
 
 #password {
@@ -143,7 +142,18 @@ h1 {
 }
 
 #registerlink {
-  margin-left: 75px;
+  margin-left: 88px;
+}
+
+.sr-only {
+  font-size: 1.2em;
+}
+
+#logo {
+  position: absolute;
+  top: 22%;
+  left: 6.5%;
+  height: 15vh;
 }
 
 </style>
