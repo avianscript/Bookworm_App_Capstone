@@ -97,7 +97,7 @@ label {
 }
 
 .card {
-    height: 240px;
+    height: 14rem;
     background-color: #3f2950;
 }
 
@@ -116,7 +116,7 @@ label {
 }
 
 img {
-    height: 240px;
+    height: 98%;
     /* height: 14rem; */
 }
 </style>

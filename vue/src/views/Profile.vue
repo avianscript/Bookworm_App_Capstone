@@ -22,9 +22,9 @@
             <button type="submit" v-on:click.prevent="submitReadingActivity()">Submit Reading Activity</button>
         </form>
             <h2>Your Books:</h2>
-            <record-reading id="allBooks" v-bind:books="$store.state.allBooks"/>
+            <record-reading class="allBooks" v-bind:books="$store.state.allBooks"/>
             <h2>Currently Reading:</h2>
-            <record-reading v-bind:books="$store.state.currentlyReading"/>
+            <record-reading class="allBooks" v-bind:books="$store.state.currentlyReading"/>
     </div>
 
  
@@ -81,7 +81,21 @@ export default {
 
 
 <style scoped>
+h2 {
+    background-color: #3a2649;
+    color:white;
+    font-family: "Mouse Memoirs", sans-serif;
+    text-align: left;
+    font-size: 2.5rem;
+    margin-bottom: 0;
+    padding-top: 10px;
+    padding-left: 2rem;
+    padding-bottom: 10px;
+}
 
+.allBooks {
+    height: 13rem;
+}
 
 .bookscompleted {
     height:50%;

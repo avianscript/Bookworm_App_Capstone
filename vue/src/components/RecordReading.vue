@@ -23,17 +23,7 @@ export default {
 </script>
 
 <style scoped>
-h2 {
-    background-color: #3a2649;
-    color:white;
-    font-family: "Mouse Memoirs", sans-serif;
-    text-align: left;
-    font-size: 2.5rem;
-    margin-bottom: 0;
-    padding-top: 10px;
-    padding-left: 2rem;
-    padding-bottom: 10px;
-}
+
 .book-container {
     background-color: #22162B;
     display: grid;
@@ -44,7 +34,7 @@ h2 {
     overscroll-behavior-inline: contain;
     /* border: 10px solid #57386e;
     border-radius: 1px; */
-    height: 13rem;
+    /* height: 100%; */
 
 }
 </style>
