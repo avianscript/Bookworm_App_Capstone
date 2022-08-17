@@ -9,6 +9,7 @@ import Family from '../views/Family.vue'
 import Profile from '../views/Profile.vue'
 import ActionCompleted from '../views/ActionCompleted.vue'
 import ReadingList from '../views/ReadingList.vue'
+import Prizes from '../views/Prizes.vue'
 
 Vue.use(Router)
 
@@ -85,6 +86,14 @@ const router = new Router({
       path: "/readinglist/:username",
       name: "readingList",
       component: ReadingList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/prizes",
+      name: "prizes",
+      component: Prizes,
       meta: {
         requiresAuth: true
       }

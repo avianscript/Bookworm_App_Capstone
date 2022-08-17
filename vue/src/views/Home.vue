@@ -9,7 +9,7 @@
     <p><router-link class="profilelink" v-bind:to="{name: 'profile'}">Profile</router-link> </p>
     <router-link class="familylink" :to="{ name: 'family'}">Family</router-link>
     <p><router-link class="readinglistlink" :to="{ name: 'readingList' }">Reading List</router-link></p>
-    <p>Prizes</p>
+    <p><router-link class="prizeslink" :to="{ name: 'prizes' }">Prizes</router-link></p>
   </div>
   </div>
 </template>
@@ -29,10 +29,11 @@ export default {
 </script>
 
 <style>
-  .homebackground{
-height: 90vh;
-  width: 100vw;
-  }
+   .homebackground {
+      width: 90vw;
+      height: 100vh;
+      padding-left: 4%;
+    } 
 
   h1 {
   margin: 10px;
@@ -69,7 +70,8 @@ height: 90vh;
 }
 
 .profilelink,
-.readinglistlink {
+.readinglistlink,
+.prizeslink {
       color: #F8C630;
 
 }

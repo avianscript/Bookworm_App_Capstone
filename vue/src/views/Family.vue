@@ -18,7 +18,9 @@
           >Reading List</router-link
         >
       </p>
-      <p>Prizes</p>
+      <p>
+        <router-link class="prizelink" :to="{ name: 'prizes' }">
+          Prizes</router-link></p>
     </div>
     <div class="familywindow">
       <div class="headline">
@@ -198,7 +200,7 @@ h3 {
     font-family: "Mouse Memoirs", sans-serif;
 }
 
-.familylink {
+.familylink, .prizelink {
   color: #f8c630;
 }
 </style>
