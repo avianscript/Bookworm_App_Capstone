@@ -27,11 +27,13 @@
       <h3 v-show="familyName == ''">Please register your family...</h3>
       <h3 v-show="familyName != ''">The {{ family.familyName }} family</h3>
       </div>
-      <div class="familymembers"
+      <!-- <div class="familymembers"
           v-for="member in this.$store.state.familyMembers"
           v-bind:key="member.user_id">
           <p>{{ member.username + familyReading }}</p>
-      </div>
+      </div> -->
+      <reading-info v-for="member in this.$store.state.familyMembers"
+      v-bind:key="member.user_id" v-bind:curUser="member"/>
       <div v-if="!isRegistered">
         <p id="RegisterFamily">Register your family!</p>
         <input
@@ -85,9 +87,13 @@
 
 <script>
 import FamilyService from "../services/FamilyService";
+import ReadingInfo from "../components/ReadingInfo.vue"
 
 export default {
   name: "the-family",
+  components: {
+    ReadingInfo
+  },
   data() {
     return {
       familyReading: "",
@@ -111,7 +117,7 @@ export default {
   props: ["id"],
 
   created() {
-    FamilyService.getFamilyName().then((response) => {
+    FamilyService.getFamilyName(this.$store.state.user).then((response) => {
       this.family.familyName = response.data;
         FamilyService.list(this.$store.state.user).then((response) => {
           this.$store.state.familyMembers = response.data;

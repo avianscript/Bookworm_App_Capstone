@@ -110,10 +110,10 @@ public class BookWormController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    @RequestMapping(value = "/check_reading_activity", method = RequestMethod.GET)
-    public ReadingActivity checkReadingActivity(@RequestBody String userName) {
+    @RequestMapping(value = "/check_reading_activity/{username}", method = RequestMethod.GET)
+    public ReadingActivity checkReadingActivity(@PathVariable String username) {
 
-        int userid = userDao.findIdByUsername(userName);
+        int userid = userDao.findIdByUsername(username);
         ReadingActivity readingActivity = new ReadingActivity( userService.getMinutesRead(userid), userService.getBooksByStatus(userid, "READ"),userService.getBooksByStatus(userid, "READING"));
 
         return readingActivity;
