@@ -1,8 +1,8 @@
 <template>
-  <div class="card" v-bind:class="{ selected: isSelected }">
+  <div class="card" :class="{ selected: isSelected }">
     <img v-on:click="selectBook()" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
     <div v-on:click="selectBook()" id="nocover" v-else >{{ book.book_name }}<p>{{ book.author }}</p></div>
-    <div v-bind:class="{ 'color-overlay': isSelected }"></div>
+    <div v-on:click="selectBook()" v-bind:class="{ 'color-overlay': isSelected }"></div>
     <p class="centered">Log Reading:</p>
     <form v-show="isSelected" class="centered">
         <!-- <label for="time-read">Minutes Read:</label><br> -->
@@ -29,16 +29,19 @@ export default {
               username: this.$store.state.user.username, 
               minutes_read: "",
               isbn: this.book.isbn
-          }
+            }
+
         }
     },
     methods: {
         selectBook(){
-            if(this.$store.state.selectedBook == this.book.isbn){
-                this.$store.commit('SET_SELECTED_BOOK', "")
-            } else{
+            if(this.$store.state.selectedBook != this.book.isbn){
                 this.$store.commit('SET_SELECTED_BOOK', this.book.isbn)
             }
+            else{
+                this.$store.commit('SET_SELECTED_BOOK', '')
+            }
+            this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', '0')
             
         },
         submitReadingInfo() {
@@ -47,12 +50,21 @@ export default {
                     // this.$router.push('/actioncompleted')
                 }
                 BookService.listCurrent(this.user).then(response => {
-                this.$store.state.currentlyReading = response.data;
+                    this.$store.commit('SET_CURRENTLY_READING', response.data)
+                })
+                BookService.listCompleted(this.user).then(response => {
+                    this.$store.commit('SET_FINISHED_READING', response.data)
                 })
             });
+            this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', '0');
             FamilyService.getReadingActivityChild(this.user).then(response => {
                 this.$store.commit('SET_TOTAL_MINUTES_READ', response.data.minutes_read); 
-            })
+            }),
+            BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
+                // this.minutes_read = response.data;
+                // this.totalMinutes = response.data;
+                this.$store.commit('SET_CUR_BOOK_MINUTES_READ', response.data)
+            });
         }
         
     },

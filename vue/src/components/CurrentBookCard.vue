@@ -1,7 +1,7 @@
 <template>
   <div class="card" v-bind:class="{ selected: isSelected }">
     <img v-on:click="selectBook()" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
-    <div v-bind:class="{ 'color-overlay': isSelected }"></div>
+    <div v-on:click="selectBook()" v-bind:class="{ 'color-overlay': isSelected }"></div>
     
     <form v-show="isSelected" class="centered">
         <p class="centered">Hours: {{ this.hours }}</p> 
@@ -27,7 +27,7 @@ export default {
             minutes_read: "",
             // hours: "",
             // minutes: "",
-            totalMinutes: "",
+            // totalMinutes: "",
             readingActivity: {
                 user_id: "",
                 book_id: "",
@@ -46,10 +46,12 @@ export default {
                 this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', this.book.isbn)
             }
             BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
-                this.minutes_read = response.data;
-                this.totalMinutes = response.data;
+                // this.minutes_read = response.data;
+                // this.totalMinutes = response.data;
+                this.$store.commit('SET_CUR_BOOK_MINUTES_READ', response.data)
             });
-            this.minuteHour();
+            // this.minuteHour();
+            this.$store.commit('SET_SELECTED_BOOK', '0')
             
         },
         markComplete() {
@@ -83,6 +85,9 @@ export default {
     computed: {
         isSelected(){
             return this.$store.state.currentlyReadingSelectedBook == this.book.isbn;
+        },
+        totalMinutes(){
+            return this.$store.state.curBookMinutesRead;
         },
         minutes(){
             return this.totalMinutes % 60;

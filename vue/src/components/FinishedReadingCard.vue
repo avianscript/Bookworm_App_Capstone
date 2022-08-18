@@ -1,7 +1,7 @@
 <template>
   <div class="card" v-bind:class="{ selected: isSelected }">
     <img v-on:click="selectBook()" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
-    <div v-bind:class="{ 'color-overlay': isSelected }"></div>
+    <div v-on:click="selectBook()" v-bind:class="{ 'color-overlay': isSelected }"></div>
     <form v-show="isSelected" class="centered">
         <!-- <label for="time-read">Minutes Read:</label><br> -->
         
@@ -42,6 +42,7 @@ export default {
             BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
                 this.minutes_read = response.data;
             })
+            this.$store.commit('SET_SELECTED_BOOK', '0')
             
         },
         markIncomplete() {

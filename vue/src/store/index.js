@@ -39,14 +39,24 @@ export default new Vuex.Store({
 
     },
     totalMinutesRead: "",
+    curBookMinutesRead: "",
     selectedBook: "",
     currentlyReadingSelectedBook: "",
     token: currentToken || '',
     user: currentUser || {}
   },
   mutations: {
+    SET_CUR_BOOK_MINUTES_READ(state, payload){
+      state.curBookMinutesRead = payload;
+    },
     SET_TOTAL_MINUTES_READ(state, payload){
       state.totalMinutesRead = payload;
+    },
+    SET_CURRENTLY_READING(state, payload){
+      state.currentlyReading = payload;
+    },
+    SET_FINISHED_READING(state, payload){
+      state.finishedReading = payload;
     },
     SET_SELECTED_BOOK(state, payload){
       state.selectedBook = payload;
