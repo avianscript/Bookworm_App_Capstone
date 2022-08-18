@@ -57,7 +57,7 @@ export default {
     position:relative;
     margin: 0 auto;
     margin-bottom: 5px;
-    color:rgb(92, 86, 86);
+    color:rgb(54, 52, 52);
     font-size: 23px;
     font-family: "Mouse Memoirs", sans-serif;
     border-radius: 15px;
