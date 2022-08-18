@@ -198,10 +198,10 @@ h3 {
 .familymembers {
     height:40px;
     width: 50%;
-    background-color: #22162B;
+    background: rgba(255, 253, 253, 0.7);
     position:relative;
     margin: 0 auto;
-    color:white;
+    color:rgb(131, 126, 126);
     font-size: 20px;
     font-family: "Mouse Memoirs", sans-serif;
 }

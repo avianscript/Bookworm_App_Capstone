@@ -46,20 +46,23 @@ export default {
 
 #flexcontainer {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin-top: 5px;
 }
 
 .familymembers {
-    height:3rem;
+    height:53px;
     width: 50%;
-    background-color: #22162B;
+    background: rgba(255, 253, 253, 0.521);
     position:relative;
     margin: 0 auto;
-    margin-bottom: 2rem;
-    color:white;
-    font-size: 20px;
+    margin-bottom: 5px;
+    color:rgb(92, 86, 86);
+    font-size: 23px;
     font-family: "Mouse Memoirs", sans-serif;
+    border-radius: 15px;
+    border: solid;
+    border-color: white;
 }
 
 </style>
