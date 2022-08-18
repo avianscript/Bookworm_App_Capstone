@@ -128,15 +128,18 @@ export default {
 h3 {
     margin-bottom: 0;
     margin-top: 0;
+    padding-left: 13vw;
 }
 
 h2 {
+    display: flex;
     background-color: #3a2649;
     color:white;
     font-family: "Mouse Memoirs", sans-serif;
     text-align: left;
     font-size: 2.5rem;
     margin-bottom: 0;
+    margin-top: 0;
     padding-top: 10px;
     padding-left: 2rem;
     padding-bottom: 10px;
@@ -144,6 +147,7 @@ h2 {
 
 .allBooks {
     height: 13rem;
+    padding-bottom: 1rem;
 }
 
 .bookscompleted {
