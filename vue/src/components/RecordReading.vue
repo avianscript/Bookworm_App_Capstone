@@ -29,6 +29,8 @@ export default {
     display: grid;
     gap: 1%;
     grid-auto-flow: column;
+    margin-bottom: 0;
+    padding-bottom: 0;
 
 
     overflow-x: auto;

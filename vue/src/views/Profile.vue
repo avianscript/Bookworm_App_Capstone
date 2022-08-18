@@ -147,7 +147,7 @@ h2 {
 
 .allBooks {
     height: 13rem;
-    padding-bottom: 1rem;
+    padding-bottom: 3.5vh;
 }
 
 .bookscompleted {
@@ -166,7 +166,7 @@ h2 {
     left:18%;
     background: rgba(114,78,145,.95);
     /* background: #22162B; */
-    height:88vh;
+    height:97.4vh;
     width: 70vw;
 }
 </style>
