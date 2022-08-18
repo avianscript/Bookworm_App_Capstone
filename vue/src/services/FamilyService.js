@@ -3,8 +3,8 @@ import axios from 'axios';
 
 export default {
 
-    getFamilyName() {
-        return axios.get(`/family_name`);
+    getFamilyName(user) {
+        return axios.get(`/family_name`, user);
     },
 
     list(username) {
@@ -24,7 +24,7 @@ export default {
     },
 
     getReadingActivity(username) {
-        return axios.get(`/check_reading_activity`, username)
+        return axios.get(`/check_reading_activity/`+username)
     },
     
     getReadingActivityChild(user) {
