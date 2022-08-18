@@ -1,15 +1,8 @@
 package com.techelevator.controller;
 
-import com.techelevator.Service.BookService;
-import com.techelevator.Service.ParentService;
-import com.techelevator.Service.ReadingService;
-import com.techelevator.Service.UserService;
+import com.techelevator.Service.*;
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.Book;
-import com.techelevator.model.Family;
-import com.techelevator.model.ReadingActivity;
-import com.techelevator.model.RegisterUserDTO;
-import com.techelevator.model.Reading;
+import com.techelevator.model.*;
 import com.techelevator.model.User.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,13 +21,15 @@ public class BookWormController {
     private UserDao userDao;
     private ReadingService readingService;
     private UserService userService;
+    private PrizeService prizeService;
 
-    BookWormController(ParentService parentService, BookService bookService, UserDao userDao, ReadingService readingService, UserService userService){
+    BookWormController(ParentService parentService, BookService bookService, UserDao userDao, ReadingService readingService, UserService userService, PrizeService prizeService){
         this.parentService = parentService;
         this.bookService = bookService;
         this.userDao = userDao;
         this.readingService = readingService;
         this.userService = userService;
+        this.prizeService = prizeService;
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -160,5 +155,12 @@ public class BookWormController {
         int userId = userDao.findIdByUsername(principal.getName());
         List<User> users =userService.familyMembers(userId);
         return users;
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/prizes", method = RequestMethod.GET)
+    public List<Prize> prizeList() {
+        return prizeService.findAll();
     }
 }
