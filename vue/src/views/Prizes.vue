@@ -14,7 +14,8 @@
              <h1 class="pageheading">Prizes coming soon!</h1>
         </div>
          <div class="prizebody">
-             <p>Prizes will be displayed here!</p>
+             <p v-for="prize in this.$store.state.prizes" v-bind:key="prize">Prizes will be displayed here!</p>
+            <p> {{this.$store.state.prize}} </p>
              <img id="trophy" src="trophy1.png">
              <img id="trophy" src="trophy1.png">
              <img id="trophy" src="trophy1.png">
@@ -24,13 +25,22 @@
 </template>   
 
 <script>   
+import PrizeService from '../services/PrizeService.js'
+
     export default {   
         data() {
             return {
             username: this.$store.state.user.username,
              }
+        },
+
+        created() {
+            PrizeService.list().then( (response) => {
+               this.$store.state.prizes = response.data; 
+            })
         }
     };
+
 </script>
 
 <style scoped>

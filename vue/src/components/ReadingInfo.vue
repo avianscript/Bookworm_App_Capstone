@@ -47,6 +47,7 @@ export default {
 #flexcontainer {
     display: flex;
     justify-content: space-between;
+    margin-top: 5px;
 }
 
 .familymembers {

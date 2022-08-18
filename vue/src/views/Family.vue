@@ -196,7 +196,7 @@ h3 {
 }
 
 .familymembers {
-    height:30px;
+    height:40px;
     width: 50%;
     background-color: #22162B;
     position:relative;
