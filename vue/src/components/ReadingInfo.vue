@@ -1,11 +1,11 @@
 <template>
     <div class="familymembers" v-on:click="onClick()">
         {{curUser.username}} 
-        <div v-if="isVisible">
-        Total Minutes Read: {{ReadingActivity.minutes_read}}
-        Books Completed: {{ReadingActivity.books_read}}
-        Books Reading: {{ReadingActivity.books_reading}}
-        </div>
+        <ul id="flexcontainer" v-if="isVisible">
+        <li>Total Minutes Read: {{ReadingActivity.minutes_read}}</li>
+        <li>Books Completed: {{ReadingActivity.books_read}}</li>
+        <li>Books Reading: {{ReadingActivity.books_reading}}</li>
+        </ul>
     </div>
 </template>
 
@@ -43,6 +43,11 @@ export default {
 </script>
 
 <style scoped>
+
+#flexcontainer {
+    display: flex;
+    justify-content: space-between;
+}
 
 .familymembers {
     height:3rem;
