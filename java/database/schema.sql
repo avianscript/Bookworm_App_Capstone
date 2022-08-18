@@ -11,7 +11,7 @@ DROP TABLE IF EXISTS public.users;
 
 CREATE TABLE IF NOT EXISTS prize (
 	prize_id SERIAL,
-	prize_name varchar(50) NOT NULL UNIQUE,
+	name varchar(50) NOT NULL UNIQUE,
 	description varchar(50) NOT NULL,
 	milestone int NULL,
 	maxprizes int NULL,
