@@ -6,8 +6,11 @@ export default {
     list(user) {
         return axios.get(`/books`, user);
     },
-    listCompleted(user){
+    listCurrent(user){
         return axios.get('/currently_reading', user)
+    },
+    listCompleted(user){
+        return axios.get('/finished_reading', user)
     },
     listReadingDetails() {
         return axios.get(`/reading_details`)

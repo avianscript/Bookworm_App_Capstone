@@ -136,6 +136,13 @@ public class BookWormController {
 
     @PreAuthorize("isAuthenticated()")
     @ResponseStatus(HttpStatus.ACCEPTED)
+    @RequestMapping(value = "/finished_reading", method = RequestMethod.GET)
+    public List<Book> finishedReading(Principal user){
+        return userService.finishedReading(userDao.findIdByUsername(user.getName()));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @ResponseStatus(HttpStatus.ACCEPTED)
     @RequestMapping(value = "/check_reading_activity_child", method = RequestMethod.GET)
     public ReadingActivity checkReadingActivityChild(Principal curUser) {
 

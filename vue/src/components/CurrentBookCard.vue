@@ -2,9 +2,10 @@
   <div class="card" v-bind:class="{ selected: isSelected }">
     <img v-on:click="selectBook()" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
     <div v-bind:class="{ 'color-overlay': isSelected }"></div>
-    <p class="centered">Minutes Read:</p>
+    
     <form v-show="isSelected" class="centered">
-        <p>{{ this.minutes_read }}</p>
+        <p class="centered">Hours: {{ this.hours }}</p> 
+        <p>Minutes: {{ this.minutes }}</p>
         <!-- <label for="time-read">Minutes Read:</label><br> -->
         
         <button id="submit" v-on:click.prevent="markComplete()" type="submit">Mark Finished</button>
@@ -24,6 +25,9 @@ export default {
         return {
             url: "/book/" + this.book.isbn,
             minutes_read: "",
+            // hours: "",
+            // minutes: "",
+            totalMinutes: "",
             readingActivity: {
                 user_id: "",
                 book_id: "",
@@ -43,7 +47,9 @@ export default {
             }
             BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
                 this.minutes_read = response.data;
-            })
+                this.totalMinutes = response.data;
+            });
+            this.minuteHour();
             
         },
         markComplete() {
@@ -51,13 +57,39 @@ export default {
                 if (response.status === 201) {
                     this.$router.push('/actioncompleted')
                 }
-            })
+                BookService.listCurrent(this.user).then(response => {
+                this.$store.state.currentlyReading = response.data;
+                }),
+                BookService.listCompleted(this.user).then(response => {
+                this.$store.state.finishedReading = response.data;
+                })
+            });
+        },
+        minuteHour() {
+            let minute = this.totalMinutes % 60;
+            this.totalMinutes -= minute;
+            this.hours = this.totalMinutes/60;
+            // this.totalMinutes %= 60;
+            this.minutes = minute;
         }
         
+    },
+    created() {
+        BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
+                this.minutes_read = response.data;
+                this.totalMinutes = response.data;
+            });
     },
     computed: {
         isSelected(){
             return this.$store.state.currentlyReadingSelectedBook == this.book.isbn;
+        },
+        minutes(){
+            return this.totalMinutes % 60;
+        },
+        hours(){
+            let minute = this.totalMinutes % 60;
+            return (this.totalMinutes-minute)/60;
         }
     }
 }

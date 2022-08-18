@@ -14,7 +14,7 @@ import CurrentBookCard from '@/components/CurrentBookCard.vue';
 export default {
     name: 'reading-list',
     props: {
-        books: Object,
+        books: Array,
     },
     components: {
         CurrentBookCard

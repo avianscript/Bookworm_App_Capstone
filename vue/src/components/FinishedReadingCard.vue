@@ -1,20 +1,17 @@
 <template>
   <div class="card" v-bind:class="{ selected: isSelected }">
     <img v-on:click="selectBook()" v-if="book.isbn" v-bind:src="'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'" />
-    <div v-on:click="selectBook()" id="nocover" v-else >{{ book.book_name }}<p>{{ book.author }}</p></div>
     <div v-bind:class="{ 'color-overlay': isSelected }"></div>
-    <p class="centered">Log Reading:</p>
     <form v-show="isSelected" class="centered">
         <!-- <label for="time-read">Minutes Read:</label><br> -->
-        <input placeholder="Minutes" min=1 id="time-read" name="timeRead" type="number" v-model="readingActivity.minutes_read"/><br>
-        <input id="submit" v-on:click.prevent="submitReadingInfo()" type="submit"/>
+        
+        <button id="submit" v-on:click.prevent="markIncomplete()" type="submit">Mark Unfinished</button>
     </form>
   </div>
 </template>
 
 <script>
 import BookService from '../services/BookService';
-import FamilyService from '../services/FamilyService';
 
 export default {
     name: 'book-card',
@@ -24,41 +21,47 @@ export default {
     data() {
         return {
             url: "/book/" + this.book.isbn,
-            user: this.$store.state.user,
+            minutes_read: "",
             readingActivity: {
-              username: this.$store.state.user.username, 
-              minutes_read: "",
-              isbn: this.book.isbn
-          }
+                user_id: "",
+                book_id: "",
+                minutes_read: "",
+                username: this.$store.state.user.username, 
+                isbn: this.book.isbn
+            },
+            bookStatus: [this.book.isbn, 'READING']
         }
     },
     methods: {
         selectBook(){
-            if(this.$store.state.selectedBook == this.book.isbn){
-                this.$store.commit('SET_SELECTED_BOOK', "")
+            if(this.$store.state.currentlyReadingSelectedBook == this.book.isbn){
+                this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', "")
             } else{
-                this.$store.commit('SET_SELECTED_BOOK', this.book.isbn)
+                this.$store.commit('SET_CURRENTLY_READING_SELECTED_BOOK', this.book.isbn)
             }
+            BookService.minutesRead(this.readingActivity.username, this.readingActivity.isbn).then(response => {
+                this.minutes_read = response.data;
+            })
             
         },
-        submitReadingInfo() {
-            BookService.submitReading(this.readingActivity).then( response => {
+        markIncomplete() {
+            BookService.updateBookStatus(this.bookStatus).then( response => {
                 if (response.status === 201) {
-                    // this.$router.push('/actioncompleted')
+                    this.$router.push('/actioncompleted')
                 }
                 BookService.listCurrent(this.user).then(response => {
                 this.$store.state.currentlyReading = response.data;
+                }),
+                BookService.listCompleted(this.user).then(response => {
+                this.$store.state.finishedReading = response.data;
                 })
-            });
-            FamilyService.getReadingActivityChild(this.user).then(response => {
-                this.$store.commit('SET_TOTAL_MINUTES_READ', response.data.minutes_read); 
             })
         }
         
     },
     computed: {
         isSelected(){
-            return this.$store.state.selectedBook == this.book.isbn;
+            return this.$store.state.currentlyReadingSelectedBook == this.book.isbn;
         }
     }
 }
@@ -69,12 +72,6 @@ p {
     color: white;
     font-size: 1.1rem;
     margin: 1px;
-}
-
-#nocover {
-    height: 98%;
-    font-size: 1.5rem;
-    color: white;
 }
 
 #time-read {

@@ -29,6 +29,11 @@ public class UserService {
         return userDao.currentlyReading(userId);
     }
 
+    public List<Book> finishedReading(int userId){
+        return userDao.finishedReading(userId);
+    }
+
+
     public int getMinutesRead(int userId){
         return userDao.getMinutesRead(userId);
     }

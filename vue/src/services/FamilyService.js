@@ -25,5 +25,9 @@ export default {
 
     getReadingActivity(username) {
         return axios.get(`/check_reading_activity`, username)
+    },
+    
+    getReadingActivityChild(user) {
+        return axios.get(`/check_reading_activity_child`, user)
     }
 }

@@ -2,14 +2,14 @@
 <div>
 
     <div class="book-container">
-        <book-card v-bind:book="book" v-for="book in books" v-bind:key="book.isbn" />
+        <finished-reading-card v-bind:book="book" v-for="book in books" v-bind:key="book.isbn" />
     </div>
 </div>
   
 </template>
 
 <script>
-import BookCard from '@/components/BookCard.vue';
+import FinishedReadingCard from '@/components/FinishedReadingCard.vue';
 
 export default {
     name: 'reading-list',
@@ -17,7 +17,7 @@ export default {
         books: Array,
     },
     components: {
-        BookCard
+        FinishedReadingCard
     }
 }
 </script>

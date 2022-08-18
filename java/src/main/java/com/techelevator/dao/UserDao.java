@@ -34,6 +34,8 @@ public interface UserDao {
 
     List<Book> currentlyReading(int userId);
 
+    List<Book> finishedReading(int userId);
+
     List<User> familyMembers(int userId);
 
 

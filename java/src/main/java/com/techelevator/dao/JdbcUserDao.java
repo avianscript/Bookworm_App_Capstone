@@ -165,6 +165,17 @@ public class JdbcUserDao implements UserDao {
         return books;
     }
 
+    @Override
+    public List<Book> finishedReading(int userId){
+        String sql = "SELECT * FROM book b JOIN book_user bu ON b.book_id = bu.book_id WHERE user_id = ? AND status = ?";
+        SqlRowSet rows = jdbcTemplate.queryForRowSet(sql, userId, "READ");
+        List<Book> books = new ArrayList<>();
+        while (rows.next()){
+            books.add(mapRowToBook(rows));
+        }
+        return books;
+    }
+
 
     @Override
     public int getBooksByStatus(int userId,String status){
